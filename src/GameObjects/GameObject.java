@@ -1,5 +1,5 @@
 package src.GameObjects;
-
+import java.awt.* ;
 import src.utils.Vector2;
 
 public abstract class GameObject {
@@ -12,11 +12,11 @@ public abstract class GameObject {
     int height;
 
     
-    void onCollisionEnter(GameObject collision){}
+    public void onCollisionEnter(GameObject collision){}
 
-    void update(){};
+    public void update(Graphics g){};
 
-    void  init(){};
+    public void init(){};
 
     
 }
