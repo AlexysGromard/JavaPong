@@ -5,11 +5,11 @@ import src.utils.Vector2;
 public abstract class GameObject {
 
     
-    String name;
-    Vector2 position;
+    public String name;
+    public Vector2 position;
 
-    int width;
-    int height;
+    public int width;
+    public int height;
 
     
     public void onCollisionEnter(GameObject collision){}

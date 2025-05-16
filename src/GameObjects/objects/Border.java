@@ -1,5 +1,7 @@
 package src.GameObjects.objects;
 
-public class Border {
+import src.GameObjects.GameObject;
+
+public class Border extends GameObject{
     
 }
