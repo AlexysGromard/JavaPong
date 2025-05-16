@@ -8,6 +8,9 @@ public abstract class GameObject {
     String name;
     Vector2 position;
 
+    int width;
+    int height;
+
     
     void onCollisionEnter(GameObject collision){}
 
