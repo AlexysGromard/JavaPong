@@ -1,4 +1,4 @@
-package src.GameObjects;
+package GameObjects;
 
 public class GameCollision {
     

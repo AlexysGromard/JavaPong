@@ -1,5 +1,5 @@
-package src.GameObjects.objects;
-import src.GameObjects.GameObject;
+package GameObjects.objects;
+import GameObjects.GameObject;
 
 public class Text extends GameObject{
     

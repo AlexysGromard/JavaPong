@@ -1,9 +1,9 @@
-package src.GameObjects.objects;
+package GameObjects.objects;
 
 import java.awt.Color;
 
-import src.GameObjects.GameObject;
-import src.utils.Vector2;
+import GameObjects.GameObject;
+import utils.Vector2;
 
 public class Border extends GameObject{
     

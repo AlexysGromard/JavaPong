@@ -1,9 +1,9 @@
-package src.windows;
+package windows;
 import java.awt.* ;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
-import src.GameObjects.GameObject;
+import GameObjects.GameObject;
 
 public class Game extends JPanel {
 

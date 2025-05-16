@@ -1,6 +1,6 @@
-package src.GameObjects;
+package GameObjects;
 import java.awt.* ;
-import src.utils.Vector2;
+import utils.Vector2;
 
 public abstract class GameObject {
 

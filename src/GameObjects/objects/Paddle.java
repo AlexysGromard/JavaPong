@@ -2,6 +2,5 @@ package GameObjects.objects;
 
 import GameObjects.GameObject;
 
-public class Puck  extends GameObject{
-    
+public class Paddle extends GameObject {
 }

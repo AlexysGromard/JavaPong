@@ -1,4 +1,4 @@
-package src.windows;
+package windows;
 
 public class Menu {
     

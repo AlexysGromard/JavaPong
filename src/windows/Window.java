@@ -1,4 +1,4 @@
-package src.windows;
+package windows;
 import java.awt.Color;
 import java.awt.Dimension;
 

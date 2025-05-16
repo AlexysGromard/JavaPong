@@ -1,6 +1,6 @@
-package src.GameObjects.objects;
+package GameObjects.objects;
 
-import src.GameObjects.GameObject;
+import GameObjects.GameObject;
 
 public class Button  extends GameObject {
     
