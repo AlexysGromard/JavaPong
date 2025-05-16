@@ -1,6 +1,5 @@
 package src;
 import javax.swing.*;
-import java.awt.*;
 import src.windows.Window;
 
 public class Javapong{
