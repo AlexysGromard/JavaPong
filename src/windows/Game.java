@@ -16,7 +16,12 @@ public class Game extends JPanel {
     }
 
     private void InstantiateObjects(){
+        // Create the paddles
         gameObjects.add(new Paddle("Paddle_left", 50, 200, 12, 210, new Color(0, 255, 247)));
+        gameObjects.add(new Paddle("Paddle_right", 700, 200, 12, 210, new Color(255, 0, 224)));
+
+        // Create the puck
+        gameObjects.add(new GameObjects.objects.Puck("Puck", 400, 250, 39, 39));
     }
     
     @Override
