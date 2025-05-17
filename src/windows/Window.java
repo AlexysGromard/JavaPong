@@ -1,4 +1,6 @@
 package windows;
+import utils.FontManager;
+
 import java.awt.Color;
 import java.awt.Dimension;
 

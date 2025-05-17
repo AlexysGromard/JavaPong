@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import GameObjects.GameObject;
 import GameObjects.objects.Paddle;
+import utils.FontManager;
 
 public class Game extends JPanel {
 
@@ -22,6 +23,9 @@ public class Game extends JPanel {
 
         // Create the puck
         gameObjects.add(new GameObjects.objects.Puck("Puck", 400, 250, 39, 39));
+
+        // Create the text
+        gameObjects.add(new GameObjects.objects.Text("Title", 300, 50, "Pong", 50, FontManager.OrbitronStyle.BOLD, Color.WHITE));
     }
     
     @Override
