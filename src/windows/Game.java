@@ -26,10 +26,11 @@ public class Game extends JPanel {
         gameObjects.add(new Paddle("Paddle_right", 1391, 407, 12, 210, new Color(255, 0, 224)));
 
         // Create the puck
-        gameObjects.add(new GameObjects.objects.Puck("Puck", 400, 250, 39, 39));
+        gameObjects.add(new GameObjects.objects.Puck("Puck", 700, 493, 39, 39));
 
-        // Create the text
-        gameObjects.add(new GameObjects.objects.Text("Title", 300, 50, "Pong", 50, FontManager.OrbitronStyle.BOLD, Color.WHITE));
+        // Create the texts
+        gameObjects.add(new GameObjects.objects.Text("Score_left", 629, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, Color.WHITE));
+        gameObjects.add(new GameObjects.objects.Text("Score_right", 759, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, Color.WHITE));
     }
 
     @Override

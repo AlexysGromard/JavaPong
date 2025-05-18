@@ -34,7 +34,7 @@ public class Text extends GameObject{
 
         g2.setFont(FontManager.getOrbitron(fontSize, fontStyle));
         g2.setColor(color);
-        g2.drawString(text, position.x, position.y);
+        g2.drawString(text, position.x, position.y + g2.getFontMetrics().getAscent());
 
         g2.dispose();
     }
