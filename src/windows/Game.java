@@ -10,16 +10,20 @@ import utils.FontManager;
 public class Game extends JPanel {
 
     public List<GameObject> gameObjects;
+    private final int baseWidth = 800;
+    private final int baseHeight = 500;
 
     Game(){
+        setBackground(new  Color(8, 8, 14));
+
         this.gameObjects = new ArrayList<GameObject>();
         this.InstantiateObjects();
     }
 
     private void InstantiateObjects(){
         // Create the paddles
-        gameObjects.add(new Paddle("Paddle_left", 50, 200, 12, 210, new Color(0, 255, 247)));
-        gameObjects.add(new Paddle("Paddle_right", 700, 200, 12, 210, new Color(255, 0, 224)));
+        gameObjects.add(new Paddle("Paddle_left", 37, 407, 12, 210, new Color(0, 255, 247)));
+        gameObjects.add(new Paddle("Paddle_right", 1391, 407, 12, 210, new Color(255, 0, 224)));
 
         // Create the puck
         gameObjects.add(new GameObjects.objects.Puck("Puck", 400, 250, 39, 39));
@@ -27,12 +31,38 @@ public class Game extends JPanel {
         // Create the text
         gameObjects.add(new GameObjects.objects.Text("Title", 300, 50, "Pong", 50, FontManager.OrbitronStyle.BOLD, Color.WHITE));
     }
-    
+
     @Override
-    public void paintComponent (Graphics g){
-        
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Graphics2D g2 = (Graphics2D) g.create();
+
+        // Ref width and height for scaling (1440x1024)
+        final int refWidth = 1440;
+        final int refHeight = 1024;
+
+        // Calculating the scale factor
+        double scaleX = getWidth() / (double) refWidth;
+        double scaleY = getHeight() / (double) refHeight;
+        double scale = Math.min(scaleX, scaleY); // Pour garder les proportions
+
+        // Calculating the offset to center
+        int xOffset = (int) ((getWidth() - refWidth * scale) / 2);
+        int yOffset = (int) ((getHeight() - refHeight * scale) / 2);
+
+        // Apply centering and scale
+        g2.translate(xOffset, yOffset);
+        g2.scale(scale, scale);
+
+        // Antialiasing
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Update and draw each game object
         for (GameObject go : this.gameObjects) {
-            go.update(g);
+            go.update(g2);
         }
-   }
+
+        g2.dispose();
+    }
 }
