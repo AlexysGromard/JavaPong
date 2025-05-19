@@ -12,7 +12,7 @@ public class Window  extends JFrame{
 
     public Window(){
         //Window constants
-        setSize(800,  500);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(true);
         setMinimumSize(new Dimension(600, 400));
         setTitle("Javapong - retro edition");

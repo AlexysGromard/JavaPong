@@ -1,19 +1,22 @@
 package GameObjects.objects;
 
 import GameObjects.GameObject;
+import controllers.PaddleController;
 import utils.Vector2;
 
 import java.awt.*;
 
 public class Paddle extends GameObject {
     private final Color RGBColor;
+    private PaddleController controller;
 
-    public Paddle(String name, int x, int y, int width, int height, Color RGBColor) {
+    public Paddle(String name, int x, int y, int width, int height, Color RGBColor, PaddleController controller) {
         this.name = name;
         this.position = new Vector2(x, y);
         this.width = width;
         this.height = height;
         this.RGBColor = RGBColor;
+        this.controller = controller;
     }
 
     @Override
@@ -40,6 +43,9 @@ public class Paddle extends GameObject {
 
     @Override
     public void update(Graphics g) {
+        if (controller != null) {
+            position = controller.computePosition(position);
+        }
         draw(g);
     }
 }

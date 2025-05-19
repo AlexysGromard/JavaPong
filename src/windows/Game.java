@@ -1,11 +1,15 @@
 package windows;
 import java.awt.* ;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import GameObjects.GameObject;
 import GameObjects.objects.Border;
 import GameObjects.objects.Paddle;
+import controllers.KeyBoardController;
+import controllers.PaddleController;
 import utils.FontManager;
 
 public class Game extends JPanel {
@@ -38,9 +42,19 @@ public class Game extends JPanel {
         gameObjects.add(new GameObjects.objects.Text("Score_left", 629, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, Color.WHITE));
         gameObjects.add(new GameObjects.objects.Text("Score_right", 759, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, Color.WHITE));
 
+        // Create theKeyboard controllers
+        PaddleController controllerLeft= new controllers.KeyBoardController(KeyEvent.VK_Z, KeyEvent.VK_S, 6, 1018, 210);
+        PaddleController controllerRight = new controllers.KeyBoardController(KeyEvent.VK_UP, KeyEvent.VK_DOWN, 6, 1018, 210);
+
         // Create the paddles
-        gameObjects.add(new Paddle("Paddle_left", 37, 407, 12, 210, new Color(0, 255, 247)));
-        gameObjects.add(new Paddle("Paddle_right", 1391, 407, 12, 210, new Color(255, 0, 224)));
+        gameObjects.add(new Paddle("Paddle_left", 37, 407, 12, 210, new Color(0, 255, 247), controllerLeft));
+        gameObjects.add(new Paddle("Paddle_right", 1391, 407, 12, 210, new Color(255, 0, 224), controllerRight));
+
+        // Cast the controllers to KeyListener and add them to the panel
+        addKeyListener((KeyListener) controllerLeft);
+        addKeyListener((KeyListener) controllerRight);
+        setFocusable(true);
+        requestFocusInWindow();
 
         // Create the puck
         gameObjects.add(new GameObjects.objects.Puck("Puck", 700, 493, 39, 39));
