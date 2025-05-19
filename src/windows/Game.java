@@ -15,11 +15,9 @@ import utils.FontManager;
 public class Game extends JPanel {
 
     public List<GameObject> gameObjects;
-    private final int baseWidth = 800;
-    private final int baseHeight = 500;
 
     Game(){
-        setBackground(new  Color(8, 8, 14));
+        setBackground(new  Color(13, 13, 13));
 
         this.gameObjects = new ArrayList<GameObject>();
         this.InstantiateObjects();
@@ -37,11 +35,11 @@ public class Game extends JPanel {
         gameObjects.add(new GameObjects.objects.Border("Border_top", new utils.Vector2(0, 0), new utils.Vector2(1440, 6), new Color(51, 51, 51)));
         gameObjects.add(new GameObjects.objects.Border("Border_bottom", new utils.Vector2(0, 1018), new utils.Vector2(1440, 6), new Color(51, 51, 51)));
         gameObjects.add(new GameObjects.objects.Border("Border_center", new utils.Vector2(716, 0), new utils.Vector2(6, 1024), new Color(51, 51, 51)));
-        gameObjects.add(new GameObjects.objects.Circle("Circle_center", 645, 438, 150, 150, 6, new Color(51, 51, 51), new Color(8, 8, 14)));
+        gameObjects.add(new GameObjects.objects.Circle("Circle_center", 645, 438, 150, 150, 6, new Color(51, 51, 51), new Color(13, 13, 13)));
 
         // Create the texts
-        gameObjects.add(new GameObjects.objects.Text("Score_left", 629, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, Color.WHITE));
-        gameObjects.add(new GameObjects.objects.Text("Score_right", 759, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, Color.WHITE));
+        gameObjects.add(new GameObjects.objects.Text("Score_left", 629, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, new Color(242, 242, 242)));
+        gameObjects.add(new GameObjects.objects.Text("Score_right", 759, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, new Color(242, 242, 242)));
 
         // Create theKeyboard controllers
         PaddleController controllerLeft= new controllers.KeyBoardController(KeyEvent.VK_Z, KeyEvent.VK_S, 6, 1018, 210);

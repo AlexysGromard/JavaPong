@@ -6,7 +6,7 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-public class Window  extends JFrame{
+public class Window extends JFrame{
     
     JPanel panel;
 
@@ -19,7 +19,7 @@ public class Window  extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Displaying the right panel
-        this.panel = new Game();
+        this.panel = new Menu();
         setContentPane(this.panel);
         pack(); // Adjuste size of the window to fit the panel
         setLocationRelativeTo(null); // Center the window
