@@ -37,6 +37,7 @@ public class Game extends JPanel {
         gameObjects.add(new GameObjects.objects.Border("Border_top", new utils.Vector2(0, 0), new utils.Vector2(1440, 6), new Color(51, 51, 51)));
         gameObjects.add(new GameObjects.objects.Border("Border_bottom", new utils.Vector2(0, 1018), new utils.Vector2(1440, 6), new Color(51, 51, 51)));
         gameObjects.add(new GameObjects.objects.Border("Border_center", new utils.Vector2(716, 0), new utils.Vector2(6, 1024), new Color(51, 51, 51)));
+        gameObjects.add(new GameObjects.objects.Circle("Circle_center", 645, 438, 150, 150, 6, new Color(51, 51, 51), new Color(8, 8, 14)));
 
         // Create the texts
         gameObjects.add(new GameObjects.objects.Text("Score_left", 629, 27, "0", 64, FontManager.OrbitronStyle.MEDIUM, Color.WHITE));
