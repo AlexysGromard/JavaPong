@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JPanel;
 import GameObjects.GameObject;
 import GameObjects.objects.Border;
@@ -11,6 +12,7 @@ import GameObjects.objects.Paddle;
 import controllers.KeyBoardController;
 import controllers.PaddleController;
 import utils.FontManager;
+import utils.Vector2;
 
 public class Game extends JPanel {
 
@@ -30,11 +32,11 @@ public class Game extends JPanel {
      */
     private void InstantiateObjects(){
         // Create the borders
-        gameObjects.add(new GameObjects.objects.Border("Border_left", new utils.Vector2(0, 0), new utils.Vector2(6, 1024), new Color(0, 255, 247, 50), new Color(0, 255, 247), Border.BorderType.RIGHT));
-        gameObjects.add(new GameObjects.objects.Border("Border_right", new utils.Vector2(1434, 0), new utils.Vector2(6, 1024), new Color(255, 0, 224, 50), new Color(255, 0, 224), Border.BorderType.LEFT));
-        gameObjects.add(new GameObjects.objects.Border("Border_top", new utils.Vector2(0, 0), new utils.Vector2(1440, 6), new Color(51, 51, 51)));
-        gameObjects.add(new GameObjects.objects.Border("Border_bottom", new utils.Vector2(0, 1018), new utils.Vector2(1440, 6), new Color(51, 51, 51)));
-        gameObjects.add(new GameObjects.objects.Border("Border_center", new utils.Vector2(716, 0), new utils.Vector2(6, 1024), new Color(51, 51, 51)));
+        gameObjects.add(new GameObjects.objects.Border("Border_left", new Vector2(0, 0), new Vector2(6, 1024), new Color(0, 255, 247, 50), new Color(0, 255, 247), Border.BorderType.RIGHT));
+        gameObjects.add(new GameObjects.objects.Border("Border_right", new Vector2(1434, 0), new Vector2(6, 1024), new Color(255, 0, 224, 50), new Color(255, 0, 224), Border.BorderType.LEFT));
+        gameObjects.add(new GameObjects.objects.Border("Border_top", new Vector2(0, 0), new Vector2(1440, 6), new Color(51, 51, 51)));
+        gameObjects.add(new GameObjects.objects.Border("Border_bottom", new Vector2(0, 1018), new Vector2(1440, 6), new Color(51, 51, 51)));
+        gameObjects.add(new GameObjects.objects.Border("Border_center", new Vector2(716, 0), new Vector2(6, 1024), new Color(51, 51, 51)));
         gameObjects.add(new GameObjects.objects.Circle("Circle_center", 645, 438, 150, 150, 6, new Color(51, 51, 51), new Color(13, 13, 13)));
 
         // Create the texts

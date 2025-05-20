@@ -19,7 +19,7 @@ public class Window extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Displaying the right panel
-        this.panel = new Menu();
+        this.panel = new Game();
         setContentPane(this.panel);
         pack(); // Adjuste size of the window to fit the panel
         setLocationRelativeTo(null); // Center the window
