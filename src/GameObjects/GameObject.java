@@ -13,7 +13,7 @@ public abstract class GameObject {
      * Calculates if the object is colliding with another object
      * @param collision The other object to check collision with
      */
-    public void onCollisionEnter(GameObject collision){}
+    public void onCollisionEnter(GameObject collision){};
 
     /**
      * Called each frame to update the object
@@ -25,7 +25,8 @@ public abstract class GameObject {
      * Draws the object on the screen
      * @param g Graphics object to draw on
      */
-    public void draw(Graphics g){}
+    public void draw(Graphics g){};
 
-    
+
+    public void update(Graphics g, Point mousePosition){};
 }
