@@ -7,6 +7,8 @@ import utils.FontManager;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -25,6 +27,31 @@ public class Menu extends JPanel {
 
         this.gameObjects = new java.util.ArrayList<GameObject>();
         this.InstantiateObjects();
+
+        // Add a mouse listener to handle clicks
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                handleClick(e.getPoint());
+            }
+        });
+    }
+
+    /**
+     * Handles a click on the menu.
+     * This method is called when the mouse is clicked on the menu.
+     * It iterates over the game objects and checks if any of them is a button.
+     * If so, it calls the handleClick method of the button.
+     *
+     * @param clickPoint The point where the mouse was clicked
+     */
+    private void handleClick(Point clickPoint) {
+        Point logicalPoint = screenToLogical(clickPoint);
+        for (GameObject go : gameObjects) {
+            if (go instanceof Button button) {
+                button.handleClick(logicalPoint);
+            }
+        }
     }
 
     /**
@@ -37,73 +64,93 @@ public class Menu extends JPanel {
         gameObjects.add(new GameObjects.objects.Text("Title", 444, 178, "JavaPong", 96, FontManager.OrbitronStyle.BOLD, new Color(242, 242, 242)));
 
         // Create the buttons
-        gameObjects.add(new GameObjects.objects.Button(this, "play", 556, 407, 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0)));
-        gameObjects.add(new GameObjects.objects.Button(this, "options", 556, 527, 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0)));
-        gameObjects.add(new GameObjects.objects.Button(this, "quit", 556, 647, 328, 60, "QUIT", new Color(242, 242, 242), new Color(0, 0, 0, 0)));
+        Button playBtn = new Button("play", 556, 407, 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        playBtn.setClickListener(btn -> System.out.println("PLAY clicked"));
+
+        Button optionsBtn = new Button("options", 556, 527, 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        optionsBtn.setClickListener(btn -> System.out.println("OPTIONS clicked"));
+
+        Button quitBtn = new Button("quit", 556, 647, 328, 60, "QUIT", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        quitBtn.setClickListener(btn -> System.exit(0));
+
+        gameObjects.add(playBtn);
+        gameObjects.add(optionsBtn);
+        gameObjects.add(quitBtn);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D) g.create();
 
-        // Ref width and height for scaling (1440x1024)
-        final int refWidth = 1440;
-        final int refHeight = 1024;
-
-        // Calculating the scale factor
-        double scaleX = getWidth() / (double) refWidth;
-        double scaleY = getHeight() / (double) refHeight;
-        double scale = Math.min(scaleX, scaleY);
-
-        // Calculating the offset to center
-        int xOffset = (int) ((getWidth() - refWidth * scale) / 2);
-        int yOffset = (int) ((getHeight() - refHeight * scale) / 2);
-
-        // Convert mouse position to logical coordinates
-        PointerInfo pointerInfo = MouseInfo.getPointerInfo();
-        Point mousePosition = pointerInfo.getLocation(); // Coordonnées absolues écran
-        SwingUtilities.convertPointFromScreen(mousePosition, this);
-
-        // Apply the inverse of centering and scaling
-        int logicalMouseX = (int) ((mousePosition.x - xOffset) / scale);
-        int logicalMouseY = (int) ((mousePosition.y - yOffset) / scale);
-        Point logicalMousePosition = new Point(logicalMouseX, logicalMouseY);
-
-        // Apply centering and scale
-        g2.translate(xOffset, yOffset);
-        g2.scale(scale, scale);
+        RenderContext ctx = getRenderContext();
+        g2.translate(ctx.xOffset(), ctx.yOffset());
+        g2.scale(ctx.scale(), ctx.scale());
 
         // Antialiasing
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
-        // Background image
         if (backgroundImage != null) {
-            g2.drawImage(backgroundImage, 0, 0, refWidth, refHeight, null);
+            g2.drawImage(backgroundImage, 0, 0, 1440, 1024, null);
         }
 
-        // Update and draw each game object
+        // Position souris logique
+        Point mousePosition = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(mousePosition, this);
+        Point logicalMousePosition = screenToLogical(mousePosition);
+
         boolean isHoveringAnyButton = false;
 
-        for (GameObject go : this.gameObjects) {
-            if (go instanceof Button button) { // If it is a button
+        for (GameObject go : gameObjects) {
+            if (go instanceof Button button) {
                 button.update(g2, logicalMousePosition);
                 if (button.isMouseOver(logicalMousePosition)) {
                     isHoveringAnyButton = true;
                 }
-            } else { // If it is not a button, just draw it
+            } else {
                 go.update(g2);
             }
         }
 
-        // Apply the cursor style
-        if (isHoveringAnyButton) {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        } else {
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-
+        setCursor(Cursor.getPredefinedCursor(isHoveringAnyButton ? Cursor.HAND_CURSOR : Cursor.DEFAULT_CURSOR));
         g2.dispose();
     }
+
+    /**
+     * Converts a point on the screen to a point on the logical screen.
+     * @param screenPoint The point on the screen to convert.
+     * @return The converted point on the logical screen.
+     */
+    private Point screenToLogical(Point screenPoint) {
+        final int refWidth = 1440;
+        final int refHeight = 1024;
+        double scaleX = getWidth() / (double) refWidth;
+        double scaleY = getHeight() / (double) refHeight;
+        double scale = Math.min(scaleX, scaleY);
+        int xOffset = (int) ((getWidth() - refWidth * scale) / 2);
+        int yOffset = (int) ((getHeight() - refHeight * scale) / 2);
+        int logicalX = (int) ((screenPoint.x - xOffset) / scale);
+        int logicalY = (int) ((screenPoint.y - yOffset) / scale);
+        return new Point(logicalX, logicalY);
+    }
+
+    /**
+     * A record that stores the scale, x offset, and y offset of the logical screen.
+     * @param scale The scale of the logical screen.
+     * @param xOffset  The offset of the logical screen from the left side of the physical screen.
+     * @param yOffset The offset of the logical screen from the top left corner of the physical screen.
+     */
+    private record RenderContext(double scale, int xOffset, int yOffset) {}
+
+    private RenderContext getRenderContext() {
+        final int refWidth = 1440;
+        final int refHeight = 1024;
+        double scaleX = getWidth() / (double) refWidth;
+        double scaleY = getHeight() / (double) refHeight;
+        double scale = Math.min(scaleX, scaleY);
+        int xOffset = (int) ((getWidth() - refWidth * scale) / 2);
+        int yOffset = (int) ((getHeight() - refHeight * scale) / 2);
+        return new RenderContext(scale, xOffset, yOffset);
+    }
+
 }

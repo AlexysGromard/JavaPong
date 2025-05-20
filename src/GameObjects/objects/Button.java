@@ -12,12 +12,11 @@ public class Button extends GameObject {
     private int height;
     private Color fontColor;
     private Color backgroundColor;
-    private Component parentComponent;
 
     private Point mousePosition;
+    private ButtonClickListener clickListener;
 
-    public Button(Component parentComponent, String name, int x, int y, int width, int height, String text, Color fontColor, Color backgroundColor) {
-        this.parentComponent = parentComponent;
+    public Button(String name, int x, int y, int width, int height, String text, Color fontColor, Color backgroundColor) {
         this.name = name;
         this.position = new utils.Vector2(x, y);
         this.width = width;
@@ -26,6 +25,21 @@ public class Button extends GameObject {
         this.fontColor = fontColor;
         this.backgroundColor = backgroundColor;
     }
+
+    public interface ButtonClickListener {
+        void onClick(Button button);
+    }
+
+    public void setClickListener(ButtonClickListener listener) {
+        this.clickListener = listener;
+    }
+
+    public void handleClick(Point mousePosition) {
+        if (isMouseOver(mousePosition) && clickListener != null) {
+            clickListener.onClick(this);
+        }
+    }
+
 
     public boolean isMouseOver(Point mousePosition) {
         return (
