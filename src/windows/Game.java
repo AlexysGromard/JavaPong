@@ -14,10 +14,13 @@ import utils.FontManager;
 import utils.Vector2;
 
 public class Game extends JPanel {
+    private JPanel mainPanel;
 
     public List<GameObject> gameObjects;
 
-    Game(){
+    Game(JPanel mainPanel){
+        this.mainPanel = mainPanel;
+
         setBackground(new  Color(13, 13, 13));
 
         this.gameObjects = new ArrayList<GameObject>();

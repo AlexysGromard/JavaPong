@@ -11,16 +11,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Objects;
 
 public class Menu extends JPanel {
+    private JPanel mainPanel;
 
     public List<GameObject> gameObjects;
     private BufferedImage backgroundImage;
 
-    Menu(){
+    Menu(JPanel mainPanel){
+        this.mainPanel = mainPanel;
+
         setBackground(new  Color(13, 13, 13));
         try {
-            backgroundImage = ImageIO.read(getClass().getResource("/menu_background.png"));
+            backgroundImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/menu_background.png")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +69,10 @@ public class Menu extends JPanel {
 
         // Create the buttons
         Button playBtn = new Button("play", 556, 407, 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
-        playBtn.setClickListener(btn -> System.out.println("PLAY clicked"));
+        playBtn.setClickListener(btn -> {
+            CardLayout cl = (CardLayout)(mainPanel.getLayout());
+            cl.show(mainPanel, "Game");
+        });
 
         Button optionsBtn = new Button("options", 556, 527, 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
         optionsBtn.setClickListener(btn -> System.out.println("OPTIONS clicked"));

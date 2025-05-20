@@ -1,28 +1,45 @@
 package windows;
 import utils.FontManager;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.*;
 
-public class Window extends JFrame{
-    
-    JPanel panel;
+public class Window extends JFrame {
 
-    public Window(){
-        //Window constants
+    public Window() {
+        super("Javapong - retro edition");
+        JPanel mainPanel = createMainPanel();
+
+        initWindow();
+        setContentPane(mainPanel);
+        pack();
+        setLocationRelativeTo(null); // Center the window
+        setVisible(true);
+    }
+
+    /**
+     * Initialize the window with default settings.
+     */
+    private void initWindow() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(true);
         setMinimumSize(new Dimension(600, 400));
-        setTitle("Javapong - retro edition");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
 
-        // Displaying the right panel
-        this.panel = new Game();
-        setContentPane(this.panel);
-        pack(); // Adjuste size of the window to fit the panel
-        setLocationRelativeTo(null); // Center the window
-        setVisible(true);
+    /**
+     * Create the main panel of the window.
+     */
+    private JPanel createMainPanel() {
+        final JPanel panel = new JPanel(new CardLayout());
+
+        final Menu menu = new Menu(panel);
+        final Game game = new Game(panel);
+
+        panel.add(menu, "Menu");
+        panel.add(game, "Game");
+
+        return panel;
     }
 }
