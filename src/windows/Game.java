@@ -5,6 +5,8 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+
+import GameObjects.GameCollision;
 import GameObjects.GameObject;
 import GameObjects.objects.Border;
 import GameObjects.objects.Paddle;
@@ -15,15 +17,13 @@ import utils.Vector2;
 
 public class Game extends JPanel {
 
-    public List<GameObject> gameObjects;
+    public static List<GameObject> gameObjects;
 
     Game(){
-        
-
         setBackground(new  Color(13, 13, 13));
 
-        this.gameObjects = new ArrayList<GameObject>();
-        this.InstantiateObjects();
+        Game.gameObjects = new ArrayList<GameObject>();
+        this.startGame();
     }
 
     /**
@@ -31,7 +31,10 @@ public class Game extends JPanel {
      * This method creates the borders, paddles, puck, and texts.
      * It is called in the constructor of the Game class.
      */
-    private void InstantiateObjects(){
+    private void startGame(){
+
+        //Clear the list in case of a new game.
+        gameObjects.clear();
         
         // Create the borders
         gameObjects.add(new GameObjects.objects.Border("Border_left", new Vector2(0, 0), new Vector2(6, 1024), new Color(0, 255, 247, 50), new Color(0, 255, 247), Border.BorderType.RIGHT));
@@ -67,6 +70,8 @@ public class Game extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+
+
         Graphics2D g2 = (Graphics2D) g.create();
 
         // Ref width and height for scaling (1440x1024)
@@ -89,8 +94,11 @@ public class Game extends JPanel {
         // Antialiasing
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        //Check des collisions
+        GameCollision.checkCollision();
+
         // Update and draw each game object
-        for (GameObject go : this.gameObjects) {
+        for (GameObject go : Game.gameObjects) {
             go.update(g2);
         }
 
