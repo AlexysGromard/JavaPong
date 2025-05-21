@@ -16,7 +16,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-public class Menu extends JPanel {
+public class Menu extends View {
 
     public List<GameObject> gameObjects;
     private BufferedImage backgroundImage;
@@ -122,41 +122,6 @@ public class Menu extends JPanel {
         g2.dispose();
     }
 
-    /**
-     * Converts a point on the screen to a point on the logical screen.
-     * @param screenPoint The point on the screen to convert.
-     * @return The converted point on the logical screen.
-     */
-    private Point screenToLogical(Point screenPoint) {
-        final int refWidth = 1440;
-        final int refHeight = 1024;
-        double scaleX = getWidth() / (double) refWidth;
-        double scaleY = getHeight() / (double) refHeight;
-        double scale = Math.min(scaleX, scaleY);
-        int xOffset = (int) ((getWidth() - refWidth * scale) / 2);
-        int yOffset = (int) ((getHeight() - refHeight * scale) / 2);
-        int logicalX = (int) ((screenPoint.x - xOffset) / scale);
-        int logicalY = (int) ((screenPoint.y - yOffset) / scale);
-        return new Point(logicalX, logicalY);
-    }
 
-    /**
-     * A record that stores the scale, x offset, and y offset of the logical screen.
-     * @param scale The scale of the logical screen.
-     * @param xOffset  The offset of the logical screen from the left side of the physical screen.
-     * @param yOffset The offset of the logical screen from the top left corner of the physical screen.
-     */
-    private record RenderContext(double scale, int xOffset, int yOffset) {}
-
-    private RenderContext getRenderContext() {
-        final int refWidth = 1440;
-        final int refHeight = 1024;
-        double scaleX = getWidth() / (double) refWidth;
-        double scaleY = getHeight() / (double) refHeight;
-        double scale = Math.min(scaleX, scaleY);
-        int xOffset = (int) ((getWidth() - refWidth * scale) / 2);
-        int yOffset = (int) ((getHeight() - refHeight * scale) / 2);
-        return new RenderContext(scale, xOffset, yOffset);
-    }
 
 }

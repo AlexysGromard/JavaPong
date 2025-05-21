@@ -15,7 +15,7 @@ import controllers.PaddleController;
 import utils.FontManager;
 import utils.Vector2;
 
-public class Game extends JPanel {
+public class Game extends View {
 
     public static List<GameObject> gameObjects;
 
@@ -74,22 +74,9 @@ public class Game extends JPanel {
 
         Graphics2D g2 = (Graphics2D) g.create();
 
-        // Ref width and height for scaling (1440x1024)
-        final int refWidth = 1440;
-        final int refHeight = 1024;
-
-        // Calculating the scale factor
-        double scaleX = getWidth() / (double) refWidth;
-        double scaleY = getHeight() / (double) refHeight;
-        double scale = Math.min(scaleX, scaleY);
-
-        // Calculating the offset to center
-        int xOffset = (int) ((getWidth() - refWidth * scale) / 2);
-        int yOffset = (int) ((getHeight() - refHeight * scale) / 2);
-
-        // Apply centering and scale
-        g2.translate(xOffset, yOffset);
-        g2.scale(scale, scale);
+        View.RenderContext ctx = getRenderContext();
+        g2.translate(ctx.xOffset(), ctx.yOffset());
+        g2.scale(ctx.scale(), ctx.scale());
 
         // Antialiasing
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
