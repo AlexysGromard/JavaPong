@@ -2,6 +2,7 @@ package GameObjects.objects;
 
 import GameObjects.GameObject;
 import utils.FontManager;
+import utils.Vector2;
 
 import javax.swing.text.Position;
 import java.awt.*;
@@ -16,9 +17,9 @@ public class Button extends GameObject {
     private Point mousePosition;
     private ButtonClickListener clickListener;
 
-    public Button(String name, int x, int y, int width, int height, String text, Color fontColor, Color backgroundColor) {
+    public Button(String name, Vector2 position, int width, int height, String text, Color fontColor, Color backgroundColor) {
         this.name = name;
-        this.position = new utils.Vector2(x, y);
+        this.position = position;
         this.width = width;
         this.height = height;
         this.text = text;

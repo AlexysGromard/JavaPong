@@ -14,12 +14,11 @@ import utils.FontManager;
 import utils.Vector2;
 
 public class Game extends JPanel {
-    private JPanel mainPanel;
 
     public List<GameObject> gameObjects;
 
-    Game(JPanel mainPanel){
-        this.mainPanel = mainPanel;
+    Game(){
+        
 
         setBackground(new  Color(13, 13, 13));
 
@@ -33,6 +32,7 @@ public class Game extends JPanel {
      * It is called in the constructor of the Game class.
      */
     private void InstantiateObjects(){
+        
         // Create the borders
         gameObjects.add(new GameObjects.objects.Border("Border_left", new Vector2(0, 0), new Vector2(6, 1024), new Color(0, 255, 247, 50), new Color(0, 255, 247), Border.BorderType.RIGHT));
         gameObjects.add(new GameObjects.objects.Border("Border_right", new Vector2(1434, 0), new Vector2(6, 1024), new Color(255, 0, 224, 50), new Color(255, 0, 224), Border.BorderType.LEFT));
@@ -95,5 +95,6 @@ public class Game extends JPanel {
         }
 
         g2.dispose();
+      
     }
 }

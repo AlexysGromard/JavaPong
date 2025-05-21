@@ -7,12 +7,20 @@ import javax.swing.*;
 
 public class Window extends JFrame {
 
+    static JPanel mainPanel;
+
+    static public enum viewName{
+        GAME, MENU
+    }
+
+
+
     public Window() {
         super("Javapong - retro edition");
-        JPanel mainPanel = createMainPanel();
+        Window.mainPanel =  createMainPanel();
 
         initWindow();
-        setContentPane(mainPanel);
+        setContentPane(Window.mainPanel);
         pack();
         setLocationRelativeTo(null); // Center the window
         setVisible(true);
@@ -34,12 +42,32 @@ public class Window extends JFrame {
     private JPanel createMainPanel() {
         final JPanel panel = new JPanel(new CardLayout());
 
-        final Menu menu = new Menu(panel);
-        final Game game = new Game(panel);
+        final Menu menu = new Menu();
+        final Game game = new Game();
 
         panel.add(menu, "Menu");
         panel.add(game, "Game");
 
         return panel;
+    }
+
+    static void SwitchToView(viewName view){
+        if(view == viewName.GAME){
+            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
+            cl.show(mainPanel, "Game");
+        }
+        else  if(view == viewName.MENU){
+            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
+            cl.show(mainPanel, "Menu");
+        }
+
+        //Rendre le focus à la fenêtre affichée
+        Component[] components = mainPanel.getComponents();
+        for (Component comp : components) {
+            if (comp.isShowing()){
+                comp.setFocusable(true);
+                comp.requestFocusInWindow();
+            }
+        }
     }
 }

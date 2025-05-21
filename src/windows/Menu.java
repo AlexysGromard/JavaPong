@@ -3,6 +3,8 @@ package windows;
 import GameObjects.GameObject;
 import GameObjects.objects.Button;
 import utils.FontManager;
+import utils.Vector2;
+import windows.Window.viewName;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,21 +12,19 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
 public class Menu extends JPanel {
-    private JPanel mainPanel;
 
     public List<GameObject> gameObjects;
     private BufferedImage backgroundImage;
 
-    Menu(JPanel mainPanel){
-        this.mainPanel = mainPanel;
-
-        setBackground(new  Color(13, 13, 13));
+    Menu(){
+         setBackground(new  Color(13, 13, 13));
         try {
-            backgroundImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/menu_background.png")));
+            backgroundImage = ImageIO.read(new File("resources/menu_background.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,16 +68,15 @@ public class Menu extends JPanel {
         gameObjects.add(new GameObjects.objects.Text("Title", 444, 178, "JavaPong", 96, FontManager.OrbitronStyle.BOLD, new Color(242, 242, 242)));
 
         // Create the buttons
-        Button playBtn = new Button("play", 556, 407, 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button playBtn = new Button("play", new Vector2(556, 407), 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
         playBtn.setClickListener(btn -> {
-            CardLayout cl = (CardLayout)(mainPanel.getLayout());
-            cl.show(mainPanel, "Game");
+            Window.SwitchToView(viewName.GAME);
         });
 
-        Button optionsBtn = new Button("options", 556, 527, 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button optionsBtn = new Button("options", new Vector2(556, 527), 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
         optionsBtn.setClickListener(btn -> System.out.println("OPTIONS clicked"));
 
-        Button quitBtn = new Button("quit", 556, 647, 328, 60, "QUIT", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button quitBtn = new Button("quit", new Vector2(556, 647), 328, 60, "QUIT", new Color(242, 242, 242), new Color(0, 0, 0, 0));
         quitBtn.setClickListener(btn -> System.exit(0));
 
         gameObjects.add(playBtn);
