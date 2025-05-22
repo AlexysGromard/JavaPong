@@ -1,6 +1,8 @@
 package GameObjects.objects;
 
 import GameObjects.GameObject;
+import utils.AudioPlayer;
+import utils.Sound;
 import utils.Vector2;
 import windows.Game;
 
@@ -58,6 +60,9 @@ public class Puck extends GameObject{
                 this.speed.y += r.nextInt(3) - 1;
                 this.speed.y +=( (Paddle)collision).speed * 0.5;
             }
+
+            // Play sound
+            AudioPlayer.play(Sound.PUCK_SOUND);
        }
         else if(collision.name == "Border_top" || collision.name == "Border_bottom"){
             this.speed.y *= -1;
