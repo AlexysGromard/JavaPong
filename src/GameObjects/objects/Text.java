@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Text extends GameObject{
-    private String text;
+    public String text;
     private int fontSize;
     private FontManager.OrbitronStyle fontStyle;
     private Color color;

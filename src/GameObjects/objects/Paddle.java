@@ -10,6 +10,8 @@ public class Paddle extends GameObject {
     private final Color RGBColor;
     public PaddleController controller;
 
+    public int speed;
+
     public Paddle(String name, int x, int y, int width, int height, Color RGBColor, PaddleController controller) {
         this.name = name;
         this.position = new Vector2(x, y);
@@ -44,7 +46,9 @@ public class Paddle extends GameObject {
     @Override
     public void update(Graphics g) {
         if (controller != null) {
-            position = controller.computePosition(position);
+            Vector2 v = controller.computePosition(position);
+            speed = v.y - this.position.y;
+            this.position = v;
         }
         draw(g);
     }

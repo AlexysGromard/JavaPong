@@ -88,6 +88,7 @@ public class KeyBoardController extends KeyAdapter implements PaddleController {
         }
 
         internalY += dy;
+        
 
         // Contraintes de bord
         if (internalY < minY) internalY = minY;
