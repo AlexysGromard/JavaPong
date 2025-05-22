@@ -2,11 +2,9 @@ package windows;
 
 import GameObjects.GameObject;
 import GameObjects.objects.Button;
-import utils.AudioPlayer;
+import GameObjects.objects.Text;
 import utils.FontManager;
-import utils.Sound;
 import utils.Vector2;
-import windows.Window.viewName;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,17 +14,15 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 
-public class Menu extends View {
-
+public class Result extends View {
     public List<GameObject> gameObjects;
     private BufferedImage backgroundImage;
 
-    Menu(){
-         setBackground(new  Color(13, 13, 13));
+    Result(){
+        setBackground(new Color(13, 13, 13));
         try {
-            backgroundImage = ImageIO.read(new File("resources/menu_background.png"));
+            backgroundImage = ImageIO.read(new File("resources/result_background.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,9 +37,23 @@ public class Menu extends View {
                 handleClick(e.getPoint());
             }
         });
+    }
 
-        // Start GameMusic
-        AudioPlayer.loop(Sound.GAME_MUSIC);
+    private void InstantiateObjects(){
+        // Create the texts
+        gameObjects.add(new Text("score_left", 299, 346, "0", 200, FontManager.OrbitronStyle.MEDIUM, new Color(242, 242, 242)));
+        gameObjects.add(new Text("score_right", 996, 346, "0", 200, FontManager.OrbitronStyle.MEDIUM, new Color(242, 242, 242)));
+
+        gameObjects.add(new Text("result_left", 256, 597, "Winner", 64, FontManager.OrbitronStyle.REGULAR, new Color(242, 242, 242)));
+        gameObjects.add(new Text("result_right", 952, 597, "Looser", 64, FontManager.OrbitronStyle.REGULAR, new Color(242, 242, 242)));
+
+        // Button
+        Button goToMenuButton = new Button("go_to_menu", new Vector2(548, 826), 345, 60, "GO TO MENU", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        goToMenuButton.setClickListener(btn -> {
+            Window.SwitchToView(Window.viewName.MENU);
+        });
+
+        gameObjects.add(goToMenuButton);
     }
 
     /**
@@ -63,38 +73,6 @@ public class Menu extends View {
         }
     }
 
-    /**
-     * Instantiates the game objects.
-     * This method creates the borders, paddles, puck, and texts.
-     * It is called in the constructor of the Game class.
-     */
-    private void InstantiateObjects(){
-        // Create the texts
-        gameObjects.add(new GameObjects.objects.Text("Title", 444, 178, "JavaPong", 96, FontManager.OrbitronStyle.BOLD, new Color(242, 242, 242)));
-
-        // Create the buttons
-        Button playBtn = new Button("play", new Vector2(556, 407), 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
-        playBtn.setClickListener(btn -> {
-            Window.SwitchToView(viewName.GAME);
-            AudioPlayer.stop();
-        });
-
-        Button optionsBtn = new Button("options", new Vector2(556, 527), 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
-        optionsBtn.setClickListener(btn -> {
-            System.out.println("OPTIONS clicked");
-            // TODO: IMPLEMENT OPTION PAGE
-            Window.SwitchToView(viewName.RESULT);
-        });
-
-        Button quitBtn = new Button("quit", new Vector2(556, 647), 328, 60, "QUIT", new Color(242, 242, 242), new Color(0, 0, 0, 0));
-        quitBtn.setClickListener(btn -> System.exit(0));
-
-        gameObjects.add(playBtn);
-        gameObjects.add(optionsBtn);
-        gameObjects.add(quitBtn);
-    }
-
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g.create();

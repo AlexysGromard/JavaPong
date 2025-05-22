@@ -10,7 +10,7 @@ public class Window extends JFrame {
     static JPanel mainPanel;
 
     static public enum viewName{
-        GAME, MENU
+        GAME, MENU, RESULT;
     }
 
 
@@ -44,9 +44,11 @@ public class Window extends JFrame {
 
         final Menu menu = new Menu();
         final Game game = new Game();
+        final Result result = new Result();
 
         panel.add(menu, "Menu");
         panel.add(game, "Game");
+        panel.add(result, "Result");
 
         return panel;
     }
@@ -56,9 +58,12 @@ public class Window extends JFrame {
             CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
             cl.show(mainPanel, "Game");
         }
-        else  if(view == viewName.MENU){
+        else if(view == viewName.MENU){
             CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
             cl.show(mainPanel, "Menu");
+        } else if (view == viewName.RESULT) {
+            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
+            cl.show(mainPanel, "Result");
         }
 
         //Rendre le focus à la fenêtre affichée
