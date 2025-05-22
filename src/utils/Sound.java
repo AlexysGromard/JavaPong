@@ -6,7 +6,8 @@ package utils;
  */
 public enum Sound {
     GAME_MUSIC("resources/sounds/game_music.wav"),
-    BUTTON_CLICK("resources/sounds/btn_click.wav");
+    BUTTON_CLICK("resources/sounds/btn_click.wav"),
+    PUCK_SOUND("resources/sounds/puck_sound.wav");
 
     private final String filePath;
 
