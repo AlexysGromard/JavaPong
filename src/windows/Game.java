@@ -5,12 +5,15 @@ import java.awt.event.KeyListener;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import javax.swing.JPanel;
 
 import GameObjects.GameCollision;
 import GameObjects.GameObject;
 import GameObjects.objects.Border;
 import GameObjects.objects.Circle;
+import GameObjects.objects.Obstacle;
 import GameObjects.objects.Paddle;
 import GameObjects.objects.Puck;
 import GameObjects.objects.Text;
@@ -32,6 +35,8 @@ public class Game extends View {
 
 
     private static int frameCounter = 0;
+
+    private static boolean restart = false;
 
     Game(){
         setBackground(new  Color(13, 13, 13));
@@ -91,6 +96,29 @@ public class Game extends View {
         super.paintComponent(g);
 
 
+        if(restart){ 
+            //La logique du restart lorsqu'un but est marqué est appliquée afin d'éviter les accès concurents sur gameObjects dans les foreach.
+
+             List<GameObject> toDestroy = new ArrayList<GameObject>();
+
+            //Suppr all balls and add a new one:
+            for (GameObject go : gameObjects) {
+                if(go instanceof Puck || go instanceof Obstacle){
+                    toDestroy.add(go);
+                }
+            }
+            for (GameObject go : toDestroy) {
+                
+                gameObjects.remove(go);
+                
+            }
+
+            // Create the puck
+            gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
+            restart = false;
+        }
+
+
 
         Graphics2D g2 = (Graphics2D) g.create();
 
@@ -117,8 +145,15 @@ public class Game extends View {
     }
     private static void bonusManagement(){
         //In charge of increasing puck's speed or adding obstacles.
-        if(frameCounter > 600){
-            gameObjects.add(new Puck("Puck2", 700, 493, 39, 39));
+        if(frameCounter > 120){
+            Random r = new Random();
+            if(r.nextInt(2) == 0){
+                 gameObjects.add(new Puck("Puck2", 700, 493, 39, 39));
+            }
+            else{
+                gameObjects.add(new Obstacle("obs", new Vector2(r.nextInt(1000) + 200, r.nextInt(200) +400)));
+            }
+           
             frameCounter = 0;
         } 
     }
@@ -133,23 +168,7 @@ public class Game extends View {
             scoreRightPlayer++;
             textScoreRight.text = scoreRightPlayer.toString();
         }
-
-        List<GameObject> toDestroy = new ArrayList<GameObject>();
-
-        //Suppr all balls and add a new one:
-        for (GameObject go : gameObjects) {
-            if(go instanceof Puck){
-                toDestroy.add(go);
-            }
-        }
-        for (GameObject go : toDestroy) {
-            if(go instanceof Puck){
-                gameObjects.remove(go);
-            }
-        }
-
-        // Create the puck
-        gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
-        System.err.println("Created puck");
+       restart = true;
+       frameCounter = 0;
     }
 }

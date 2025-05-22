@@ -41,7 +41,7 @@ public class Puck extends GameObject{
     @Override
     public void onCollisionEnter(GameObject collision){
         Random r = new Random();
-        if(collision instanceof Paddle){
+        if(collision instanceof Paddle ){
             if(collision.position.x > this.position.y){
                 this.speed.x = 0 - this.speed.x;
                 this.position.x -= 4;
@@ -73,13 +73,29 @@ public class Puck extends GameObject{
             this.speed.y += r.nextInt(3) - 1;
        }
        else if(collision.name == "Border_left"){
-            Game.gameObjects.remove(this);
             Game.pointMarqued(false);
 
        }
         else if(collision.name == "Border_right"){
-            Game.gameObjects.remove(this);
             Game.pointMarqued(true);
+       }
+       else if(collision instanceof Obstacle){
+        
+            if(collision.position.x > this.position.y){
+                this.speed.x = 0 - this.speed.x;
+                this.position.x -= 4;
+                this.speed.x += r.nextInt(3) - 1;
+                this.speed.y += r.nextInt(3) - 1;
+            }
+            if(collision.position.x < this.position.y){
+                this.speed.x =  0 - this.speed.x;
+                this.position.x += 4;
+                this.speed.x += r.nextInt(3) - 1;
+                this.speed.y += r.nextInt(3) - 1;
+            }
+
+            // Play sound
+            AudioPlayer.play(Sound.PUCK_SOUND);
        }
 
     }
