@@ -1,7 +1,9 @@
 package GameObjects.objects;
 
 import GameObjects.GameObject;
+import utils.AudioPlayer;
 import utils.FontManager;
+import utils.Sound;
 import utils.Vector2;
 
 import javax.swing.text.Position;
@@ -37,6 +39,7 @@ public class Button extends GameObject {
 
     public void handleClick(Point mousePosition) {
         if (isMouseOver(mousePosition) && clickListener != null) {
+            AudioPlayer.play(Sound.BUTTON_CLICK);
             clickListener.onClick(this);
         }
     }

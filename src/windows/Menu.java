@@ -2,7 +2,9 @@ package windows;
 
 import GameObjects.GameObject;
 import GameObjects.objects.Button;
+import utils.AudioPlayer;
 import utils.FontManager;
+import utils.Sound;
 import utils.Vector2;
 import windows.Window.viewName;
 
@@ -39,6 +41,9 @@ public class Menu extends View {
                 handleClick(e.getPoint());
             }
         });
+
+        // Start GameMusic
+        AudioPlayer.loop(Sound.GAME_MUSIC);
     }
 
     /**
@@ -71,6 +76,7 @@ public class Menu extends View {
         Button playBtn = new Button("play", new Vector2(556, 407), 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
         playBtn.setClickListener(btn -> {
             Window.SwitchToView(viewName.GAME);
+            AudioPlayer.stop();
         });
 
         Button optionsBtn = new Button("options", new Vector2(556, 527), 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
@@ -121,7 +127,4 @@ public class Menu extends View {
         setCursor(Cursor.getPredefinedCursor(isHoveringAnyButton ? Cursor.HAND_CURSOR : Cursor.DEFAULT_CURSOR));
         g2.dispose();
     }
-
-
-
 }

@@ -12,6 +12,7 @@ import GameObjects.objects.Border;
 import GameObjects.objects.Paddle;
 import controllers.KeyBoardController;
 import controllers.PaddleController;
+import utils.AudioPlayer;
 import utils.FontManager;
 import utils.Vector2;
 
