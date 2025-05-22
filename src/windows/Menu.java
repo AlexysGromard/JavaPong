@@ -20,7 +20,6 @@ import java.util.Objects;
 
 public class Menu extends View {
 
-    public List<GameObject> gameObjects;
     private BufferedImage backgroundImage;
 
     Menu(){
@@ -44,23 +43,6 @@ public class Menu extends View {
 
         // Start GameMusic
         AudioPlayer.loop(Sound.GAME_MUSIC);
-    }
-
-    /**
-     * Handles a click on the menu.
-     * This method is called when the mouse is clicked on the menu.
-     * It iterates over the game objects and checks if any of them is a button.
-     * If so, it calls the handleClick method of the button.
-     *
-     * @param clickPoint The point where the mouse was clicked
-     */
-    private void handleClick(Point clickPoint) {
-        Point logicalPoint = screenToLogical(clickPoint);
-        for (GameObject go : gameObjects) {
-            if (go instanceof Button button) {
-                button.handleClick(logicalPoint);
-            }
-        }
     }
 
     /**

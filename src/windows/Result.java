@@ -16,7 +16,6 @@ import java.io.File;
 import java.util.List;
 
 public class Result extends View {
-    public List<GameObject> gameObjects;
     private BufferedImage backgroundImage;
 
     private Text score_left;
@@ -66,22 +65,7 @@ public class Result extends View {
         gameObjects.add(goToMenuButton);
     }
 
-    /**
-     * Handles a click on the menu.
-     * This method is called when the mouse is clicked on the menu.
-     * It iterates over the game objects and checks if any of them is a button.
-     * If so, it calls the handleClick method of the button.
-     *
-     * @param clickPoint The point where the mouse was clicked
-     */
-    private void handleClick(Point clickPoint) {
-        Point logicalPoint = screenToLogical(clickPoint);
-        for (GameObject go : gameObjects) {
-            if (go instanceof Button button) {
-                button.handleClick(logicalPoint);
-            }
-        }
-    }
+
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

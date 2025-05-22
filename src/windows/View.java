@@ -1,7 +1,11 @@
 package windows;
 
+import GameObjects.GameObject;
+import GameObjects.objects.Button;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * An abstract class representing a custom view that extends the JPanel component.
@@ -11,6 +15,8 @@ import java.awt.*;
 abstract class View extends JPanel {
     private static final int REF_WIDTH = 1440;
     private static final int REF_HEIGHT = 1024;
+
+    public List<GameObject> gameObjects;
 
     /**
      * Calculates and returns the current rendering context of the view, which
@@ -68,4 +74,24 @@ abstract class View extends JPanel {
      */
     record RenderContext(double scale, int xOffset, int yOffset) {}
 
+    /**
+     * Handles a click event by determining the logical point of the click
+     * and delegating the event to any {@code Button} objects within the current
+     * set of {@code GameObject}s.
+     *
+     * Converts the provided screen coordinate into logical coordinates relative
+     * to the rendering context, ensuring consistency across different screen
+     * resolutions, and processes the click if applicable.
+     *
+     * @param clickPoint the point on the screen where the click occurred,
+     *                   specified in screen coordinates.
+     */
+     void handleClick(Point clickPoint) {
+        Point logicalPoint = screenToLogical(clickPoint);
+        for (GameObject go : gameObjects) {
+            if (go instanceof Button button) {
+                button.handleClick(logicalPoint);
+            }
+        }
+    }
 }

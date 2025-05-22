@@ -38,7 +38,7 @@ public class Game extends View {
     Game(){
         setBackground(new  Color(13, 13, 13));
 
-        Game.gameObjects = new ArrayList<GameObject>();
+        gameObjects = new ArrayList<GameObject>();
         this.startGame();
     }
 
@@ -143,14 +143,14 @@ public class Game extends View {
         bonusManagement();
 
         // Update and draw each game object
-        for (GameObject go : Game.gameObjects) {
+        for (GameObject go : gameObjects) {
             go.update(g2);
         }
 
         frameCounter++;
         g2.dispose();
     }
-    private static void bonusManagement(){
+    private void bonusManagement(){
         //In charge of increasing puck's speed or adding obstacles.
         if(frameCounter > 600){
             Random r = new Random();
