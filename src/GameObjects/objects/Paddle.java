@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Paddle extends GameObject {
     private final Color RGBColor;
-    private PaddleController controller;
+    public PaddleController controller;
 
     public Paddle(String name, int x, int y, int width, int height, Color RGBColor, PaddleController controller) {
         this.name = name;
