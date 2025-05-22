@@ -145,7 +145,7 @@ public class Game extends View {
     }
     private static void bonusManagement(){
         //In charge of increasing puck's speed or adding obstacles.
-        if(frameCounter > 120){
+        if(frameCounter > 600){
             Random r = new Random();
             if(r.nextInt(2) == 0){
                  gameObjects.add(new Puck("Puck2", 700, 493, 39, 39));
