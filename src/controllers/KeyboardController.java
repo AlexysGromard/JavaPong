@@ -6,7 +6,7 @@ import utils.Vector2;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class KeyBoardController extends KeyAdapter implements PaddleController {
+public class KeyboardController extends KeyAdapter implements PaddleController {
     private final int keyUpCode;
     private final int keyDownCode;
 
@@ -21,7 +21,7 @@ public class KeyBoardController extends KeyAdapter implements PaddleController {
 
     private double internalY = 0; // Float position for the paddle
 
-    public KeyBoardController(int keyUpCode, int keyDownCode, int minY, int maxY, int paddleHeight) {
+    public KeyboardController(int keyUpCode, int keyDownCode, int minY, int maxY, int paddleHeight) {
         this.keyUpCode = keyUpCode;
         this.keyDownCode = keyDownCode;
         this.minY = minY;

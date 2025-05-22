@@ -2,12 +2,9 @@ package windows;
 import java.awt.* ;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.swing.JPanel;
 
 import GameObjects.GameCollision;
 import GameObjects.GameObject;
@@ -17,9 +14,8 @@ import GameObjects.objects.Obstacle;
 import GameObjects.objects.Paddle;
 import GameObjects.objects.Puck;
 import GameObjects.objects.Text;
-import controllers.KeyBoardController;
+import controllers.KeyboardController;
 import controllers.PaddleController;
-import utils.AudioPlayer;
 import utils.FontManager;
 import utils.Vector2;
 import windows.Window.viewName;
@@ -75,8 +71,8 @@ public class Game extends View {
         gameObjects.add(Game.textScoreRight);
 
         // Create theKeyboard controllers
-        PaddleController controllerLeft= new controllers.KeyBoardController(KeyEvent.VK_Z, KeyEvent.VK_S, 6, 1018, 210);
-        PaddleController controllerRight = new controllers.KeyBoardController(KeyEvent.VK_UP, KeyEvent.VK_DOWN, 6, 1018, 210);
+        PaddleController controllerLeft= new KeyboardController(KeyEvent.VK_Z, KeyEvent.VK_S, 6, 1018, 210);
+        PaddleController controllerRight = new KeyboardController(KeyEvent.VK_UP, KeyEvent.VK_DOWN, 6, 1018, 210);
 
         // Create the paddles
         gameObjects.add(new Paddle("Paddle_left", 37, 407, 12, 210, new Color(0, 255, 247), controllerLeft));
