@@ -57,6 +57,7 @@ public class Window extends JFrame {
         if(view == viewName.GAME){
             CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
             cl.show(mainPanel, "Game");
+            Game.resetGame();
         }
         else if(view == viewName.MENU){
             CardLayout cl = (CardLayout)Window.mainPanel.getLayout();

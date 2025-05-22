@@ -22,6 +22,7 @@ import controllers.PaddleController;
 import utils.AudioPlayer;
 import utils.FontManager;
 import utils.Vector2;
+import windows.Window.viewName;
 
 public class Game extends View {
 
@@ -91,15 +92,21 @@ public class Game extends View {
         gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
     }
 
+    static void resetGame(){
+        scoreLeftPlayer = 0;
+        scoreRightPlayer = 0;
+        frameCounter = 0;
+        restart = true;
+        
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-
         if(restart){ 
             //La logique du restart lorsqu'un but est marqué est appliquée afin d'éviter les accès concurents sur gameObjects dans les foreach.
 
-             List<GameObject> toDestroy = new ArrayList<GameObject>();
+            List<GameObject> toDestroy = new ArrayList<GameObject>();
 
             //Suppr all balls and add a new one:
             for (GameObject go : gameObjects) {
@@ -112,6 +119,10 @@ public class Game extends View {
                 gameObjects.remove(go);
                 
             }
+
+            textScoreLeft.text = scoreLeftPlayer.toString();
+            textScoreRight.text = scoreRightPlayer.toString();
+           
 
             // Create the puck
             gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
@@ -163,11 +174,18 @@ public class Game extends View {
         if(isLeftPlayer){
             scoreLeftPlayer++;
             textScoreLeft.text = scoreLeftPlayer.toString();
+           
         }
         else{
             scoreRightPlayer++;
             textScoreRight.text = scoreRightPlayer.toString();
         }
+
+        if(scoreLeftPlayer >= 3 || scoreRightPlayer >= 3){
+
+            Window.SwitchToView(viewName.RESULT);
+        }
+
        restart = true;
        frameCounter = 0;
     }
