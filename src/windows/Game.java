@@ -2,6 +2,7 @@ package windows;
 import java.awt.* ;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -23,12 +24,14 @@ public class Game extends View {
 
     public static List<GameObject> gameObjects;
 
-
     public static Integer scoreLeftPlayer = 0;
     public static Integer scoreRightPlayer = 0;
 
     private static Text textScoreLeft;
     private static Text textScoreRight;
+
+
+    private static int frameCounter = 0;
 
     Game(){
         setBackground(new  Color(13, 13, 13));
@@ -49,6 +52,7 @@ public class Game extends View {
 
         scoreLeftPlayer = 0;
         scoreRightPlayer = 0;
+        frameCounter = 0;
         
         // Create the borders
         gameObjects.add(new Border("Border_left", new Vector2(0, 0), new Vector2(6, 1024), new Color(0, 255, 247, 50), new Color(0, 255, 247), Border.BorderType.RIGHT));
@@ -100,13 +104,23 @@ public class Game extends View {
         //Check des collisions
         GameCollision.checkCollision();
 
+        //Check the bonuses:
+        bonusManagement();
+
         // Update and draw each game object
         for (GameObject go : Game.gameObjects) {
             go.update(g2);
         }
 
+        frameCounter++;
         g2.dispose();
-      
+    }
+    private static void bonusManagement(){
+        //In charge of increasing puck's speed or adding obstacles.
+        if(frameCounter > 600){
+            gameObjects.add(new Puck("Puck2", 700, 493, 39, 39));
+            frameCounter = 0;
+        } 
     }
 
 
@@ -120,14 +134,22 @@ public class Game extends View {
             textScoreRight.text = scoreRightPlayer.toString();
         }
 
+        List<GameObject> toDestroy = new ArrayList<GameObject>();
+
         //Suppr all balls and add a new one:
         for (GameObject go : gameObjects) {
+            if(go instanceof Puck){
+                toDestroy.add(go);
+            }
+        }
+        for (GameObject go : toDestroy) {
             if(go instanceof Puck){
                 gameObjects.remove(go);
             }
         }
 
         // Create the puck
-        gameObjects.add(new Puck("Puck2", 700, 493, 39, 39));
+        gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
+        System.err.println("Created puck");
     }
 }

@@ -36,37 +36,30 @@ public class Border extends GameObject{
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-
-        // Add anti-aliasing
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
         // Draw the shadow
         if (shadowColor != null && borderType != null) {
             for (int i = 15; i >= 1; i--) {
-                g2.setColor(new Color(shadowColor.getRed(), shadowColor.getGreen(), shadowColor.getBlue(), 50 / i));
+                g.setColor(new Color(shadowColor.getRed(), shadowColor.getGreen(), shadowColor.getBlue(), 50 / i));
                 switch (borderType) {
                     case LEFT:
-                        g2.fillRect(position.x - i, position.y - i, width + i, height + 3 * i);
+                        g.fillRect(position.x - i, position.y - i, width + i, height + 3 * i);
                         break;
                     case RIGHT:
-                        g2.fillRect(position.x, position.y - i, width + i, height + 3 * i);
+                        g.fillRect(position.x, position.y - i, width + i, height + 3 * i);
                         break;
                     case TOP:
-                        g2.fillRect(position.x - i, position.y - i, width + 3 * i, height + i);
+                        g.fillRect(position.x - i, position.y - i, width + 3 * i, height + i);
                         break;
                     case BOTTOM:
-                        g2.fillRect(position.x - i, position.y, width + 3 * i, height + i);
+                        g.fillRect(position.x - i, position.y, width + 3 * i, height + i);
                         break;
                 }
             }
         }
 
         // Draw the border
-        g2.setColor(borderColor);
-        g2.fillRect(position.x, position.y, width, height);
-
-        g2.dispose();
+        g.setColor(borderColor);
+        g.fillRect(position.x, position.y, width, height);
     }
 
     @Override

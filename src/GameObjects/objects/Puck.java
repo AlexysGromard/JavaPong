@@ -24,16 +24,10 @@ public class Puck extends GameObject{
     }
 
     @Override
-    public void draw(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-
-        // Add anti-aliasing
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    public void draw(Graphics g) {     
         // Draw the white circle
-        g2.setColor(Color.WHITE);
-        g2.fillOval(position.x, position.y, width, height);
-
-        g2.dispose();
+        g.setColor(Color.WHITE);
+        g.fillOval(position.x, position.y, width, height);
     }
 
     @Override
@@ -64,13 +58,22 @@ public class Puck extends GameObject{
             // Play sound
             AudioPlayer.play(Sound.PUCK_SOUND);
        }
-        else if(collision.name == "Border_top" || collision.name == "Border_bottom"){
+        else if(collision.name == "Border_top"){
+            this.position.y += 4;
             this.speed.y *= -1;
+            this.speed.x += r.nextInt(3) - 1;
+            this.speed.y += r.nextInt(3) - 1;
+       }
+       else if(collision.name == "Border_bottom"){
+            this.position.y -= 4;
+            this.speed.y *= -1;
+            this.speed.x += r.nextInt(3) - 1;
             this.speed.y += r.nextInt(3) - 1;
        }
        else if(collision.name == "Border_left"){
             Game.gameObjects.remove(this);
             Game.pointMarqued(false);
+
        }
         else if(collision.name == "Border_right"){
             Game.gameObjects.remove(this);

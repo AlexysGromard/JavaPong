@@ -47,10 +47,10 @@ public class Button extends GameObject {
 
     public boolean isMouseOver(Point mousePosition) {
         return (
-                mousePosition.x >= position.x &&
-                mousePosition.x <= position.x + width &&
-                mousePosition.y >= position.y &&
-                mousePosition.y <= position.y + height
+            mousePosition.x >= position.x &&
+            mousePosition.x <= position.x + width &&
+            mousePosition.y >= position.y &&
+            mousePosition.y <= position.y + height
         );
     }
 

@@ -27,16 +27,11 @@ public class Text extends GameObject{
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-
-        // Add anti-aliasing
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Graphics2D g2 = (Graphics2D) g;
 
         g2.setFont(FontManager.getOrbitron(fontSize, fontStyle));
         g2.setColor(color);
         g2.drawString(text, position.x, position.y + g2.getFontMetrics().getAscent());
-
-        g2.dispose();
     }
 
     @Override

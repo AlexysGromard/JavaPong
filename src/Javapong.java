@@ -4,7 +4,7 @@ import utils.FPSCounter;
 import windows.Window;
 
 public class Javapong{
-    static final int FPS = 60;
+    public  static final int FPS = 60;
     static final long FRAME_TIME = 1000000000 / FPS; // In nanoseconds
 
     public static void main(String[] args) throws InterruptedException {
