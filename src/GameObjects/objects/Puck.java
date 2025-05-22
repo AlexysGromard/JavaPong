@@ -44,12 +44,14 @@ public class Puck extends GameObject{
         if(collision instanceof Paddle){
             if(collision.position.x > this.position.y){
                 this.speed.x = 0 - this.speed.x;
+                this.position.x -= 4;
                 this.speed.x += r.nextInt(3) - 1;
                 this.speed.y += r.nextInt(3) - 1;
                  this.speed.y += ( (Paddle)collision).speed * 0.5;
             }
             if(collision.position.x < this.position.y){
                 this.speed.x =  0 - this.speed.x;
+                this.position.x += 4;
                 this.speed.x += r.nextInt(3) - 1;
                 this.speed.y += r.nextInt(3) - 1;
                 this.speed.y +=( (Paddle)collision).speed * 0.5;
