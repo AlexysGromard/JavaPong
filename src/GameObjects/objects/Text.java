@@ -1,10 +1,7 @@
 package GameObjects.objects;
 import GameObjects.GameObject;
 import utils.FontManager;
-
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class Text extends GameObject{
     public String text;

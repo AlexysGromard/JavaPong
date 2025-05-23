@@ -1,7 +1,5 @@
 package GameObjects.objects;
-
 import GameObjects.GameObject;
-import windows.Game;
 
 import java.awt.*;
 

@@ -6,7 +6,6 @@ import utils.FontManager;
 import utils.Sound;
 import utils.Vector2;
 
-import javax.swing.text.Position;
 import java.awt.*;
 
 public class Button extends GameObject {

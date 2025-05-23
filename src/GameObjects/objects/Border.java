@@ -2,7 +2,6 @@ package GameObjects.objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.*;
 
 import GameObjects.GameObject;
 import utils.Vector2;

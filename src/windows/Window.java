@@ -1,8 +1,5 @@
 package windows;
-import utils.FontManager;
-
 import java.awt.*;
-
 import javax.swing.*;
 
 /**
@@ -25,7 +22,7 @@ public class Window extends JFrame {
      * different user interfaces, using a card layout in the application's main panel.
      */
     static public enum viewName{
-        GAME, MENU, RESULT, PAUSE;
+        GAME, MENU, RESULT, PAUSE, NEWGAME;
     }
 
     /**
@@ -105,6 +102,10 @@ public class Window extends JFrame {
      */
     static void SwitchToView(viewName view){
         if(view == viewName.GAME){
+            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
+            cl.show(mainPanel, "Game");
+        }
+        else if(view == viewName.NEWGAME){
             CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
             cl.show(mainPanel, "Game");
             Game.resetGame();

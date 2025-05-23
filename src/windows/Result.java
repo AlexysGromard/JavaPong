@@ -73,12 +73,12 @@ public class Result extends View {
         score_left.text = Game.scoreLeftPlayer.toString();
         score_right.text = Game.scoreRightPlayer.toString();
         if(Game.scoreLeftPlayer > Game.scoreLeftPlayer){
-        result_left.text = "Winner";
-        result_right.text = "Looser";
+             result_left.text = "Looser";
+            result_right.text = "Winner";
         }
         else{
-        result_left.text = "Looser";
-        result_right.text = "Winner";
+             result_left.text = "Winner";
+            result_right.text = "Looser";
         }
 
         RenderContext ctx = getRenderContext();
