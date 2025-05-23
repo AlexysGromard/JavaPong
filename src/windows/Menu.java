@@ -55,7 +55,7 @@ public class Menu extends View {
         // Create the buttons
         Button playBtn = new Button("play", new Vector2(556, 407), 328, 60, "PLAY", new Color(242, 242, 242), 48,new Color(0, 0, 0, 0));
         playBtn.setClickListener(btn -> {
-            Window.SwitchToView(viewName.GAME);
+            Window.SwitchToView(viewName.NEWGAME);
             AudioPlayer.stop();
         });
 
