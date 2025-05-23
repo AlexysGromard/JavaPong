@@ -50,7 +50,6 @@ public class Game extends View {
      * It is called in the constructor of the Game class.
      */
     private void startGame(){
-
         //Clear the list in case of a new game.
         gameObjects = new ArrayList<GameObject>();
 
@@ -168,14 +167,12 @@ public class Game extends View {
     public static void pointMarqued(boolean isLeftPlayer){
         if(isLeftPlayer){
             scoreLeftPlayer++;
-            textScoreLeft.text = scoreLeftPlayer.toString();
-           
+            textScoreLeft.text = scoreLeftPlayer.toString();     
         }
         else{
             scoreRightPlayer++;
             textScoreRight.text = scoreRightPlayer.toString();
         }
-
         if(scoreLeftPlayer >= 3 || scoreRightPlayer >= 3){
 
             Window.SwitchToView(viewName.RESULT);

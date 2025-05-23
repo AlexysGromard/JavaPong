@@ -1,11 +1,9 @@
 package GameObjects.objects;
-
 import GameObjects.GameObject;
 import utils.AudioPlayer;
 import utils.Sound;
 import utils.Vector2;
 import windows.Game;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -19,7 +17,6 @@ public class Puck extends GameObject{
         this.position = new Vector2(x, y);
         this.width = width;
         this.height = height;
-
         this.speed = new Vector2( 9, 0);
     }
 

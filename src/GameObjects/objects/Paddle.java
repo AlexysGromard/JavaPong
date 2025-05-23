@@ -1,9 +1,7 @@
 package GameObjects.objects;
-
 import GameObjects.GameObject;
 import controllers.PaddleController;
 import utils.Vector2;
-
 import java.awt.*;
 
 public class Paddle extends GameObject {

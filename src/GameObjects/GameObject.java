@@ -10,7 +10,7 @@ public abstract class GameObject {
     public int height;
 
     /**
-     * Calculates if the object is colliding with another object
+     * Called if the object is colliding with another object
      * @param collision The other object to check collision with
      */
     public void onCollisionEnter(GameObject collision){};

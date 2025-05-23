@@ -7,28 +7,20 @@ import utils.Vector2;
 
 public class Obstacle extends GameObject{
     
-    private int middleY;
+    private int middleY; //center Y of the obstacle.
 
-    private boolean goingUp = true;
+    private boolean goingUp = true; //direction of the obstacle
 
     public Obstacle(String name, Vector2 position ){
         this.name = name;
         this.position = position;
         this.middleY = position.y;
-
         this.height = 100;
         this.width = 12;
     }
 
     @Override
     public void draw(Graphics g) {
-
-        //Indicative part
-//        g.setColor(new Color(51, 51, 51));
-//        g.fillRect(position.x + 8, this.middleY - 300,4 , 600 + this.height);
-
-
-        //Main part
         g.setColor(new Color(255, 59, 48));
         g.fillRoundRect(position.x, position.y, width, height, 10, 10);
     }

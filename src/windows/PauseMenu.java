@@ -63,17 +63,16 @@ public class PauseMenu extends View{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g.create();
 
         RenderContext ctx = getRenderContext();
-        g2.translate(ctx.xOffset(), ctx.yOffset());
-        g2.scale(ctx.scale(), ctx.scale());
+        g.translate(ctx.xOffset(), ctx.yOffset());
+        ((Graphics2D)g).scale(ctx.scale(), ctx.scale());
 
         // Antialiasing
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
         if (backgroundImage != null) {
-            g2.drawImage(backgroundImage, 0, 0, 1440, 1024, null);
+            g.drawImage(backgroundImage, 0, 0, 1440, 1024, null);
         }
 
         // Position souris logique
@@ -85,17 +84,15 @@ public class PauseMenu extends View{
 
         for (GameObject go : gameObjects) {
             if (go instanceof Button button) {
-                button.update(g2, logicalMousePosition);
+                button.update(g, logicalMousePosition);
                 if (button.isMouseOver(logicalMousePosition)) {
                     isHoveringAnyButton = true;
                 }
             } else {
-                go.update(g2);
+                go.update(g);
             }
         }
 
         setCursor(Cursor.getPredefinedCursor(isHoveringAnyButton ? Cursor.HAND_CURSOR : Cursor.DEFAULT_CURSOR));
-        g2.dispose();
     }
-
 }
