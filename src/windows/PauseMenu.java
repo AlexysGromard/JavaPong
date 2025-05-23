@@ -2,11 +2,8 @@ package windows;
 
 import GameObjects.GameObject;
 import GameObjects.objects.Button;
-import utils.AudioPlayer;
 import utils.FontManager;
-import utils.Sound;
 import utils.Vector2;
-import windows.Window.viewName;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,21 +13,19 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 
-public class Menu extends View {
-
+public class PauseMenu extends View{
     private BufferedImage backgroundImage;
 
-    Menu(){
-         setBackground(new  Color(13, 13, 13));
+    PauseMenu(){
+        setBackground(new Color(13, 13, 13));
         try {
-            backgroundImage = ImageIO.read(new File("resources/menu_background.png"));
+            backgroundImage = ImageIO.read(new File("resources/result_background.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        this.gameObjects = new java.util.ArrayList<GameObject>();
+        gameObjects = new java.util.ArrayList<GameObject>();
         this.InstantiateObjects();
 
         // Add a mouse listener to handle clicks
@@ -40,9 +35,6 @@ public class Menu extends View {
                 handleClick(e.getPoint());
             }
         });
-
-        // Start GameMusic
-        AudioPlayer.loop(Sound.GAME_MUSIC);
     }
 
     /**
@@ -50,30 +42,23 @@ public class Menu extends View {
      * This method creates the borders, paddles, puck, and texts.
      * It is called in the constructor of the Game class.
      */
-    private void InstantiateObjects(){
+    private void InstantiateObjects() {
         // Create the texts
-        gameObjects.add(new GameObjects.objects.Text("Title", 444, 178, "JavaPong", 96, FontManager.OrbitronStyle.BOLD, new Color(242, 242, 242)));
+        gameObjects.add(new GameObjects.objects.Text("Title", 389, 247, "Pause menu", 96, FontManager.OrbitronStyle.BOLD, new Color(242, 242, 242)));
 
         // Create the buttons
-        Button playBtn = new Button("play", new Vector2(556, 407), 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
-        playBtn.setClickListener(btn -> {
-            Window.SwitchToView(viewName.GAME);
-            AudioPlayer.stop();
+        Button resumeButton = new Button("resume", new Vector2(555, 476), 328, 60, "RESUME", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        resumeButton.setClickListener(btn -> {
+            Window.SwitchToView(Window.viewName.GAME);
         });
 
-        Button optionsBtn = new Button("options", new Vector2(556, 527), 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
-        optionsBtn.setClickListener(btn -> {
-            System.out.println("OPTIONS clicked");
-            // TODO: IMPLEMENT OPTION PAGE
-            Window.SwitchToView(viewName.PAUSE);
+        Button goToMenuButton = new Button("go_to_menu", new Vector2(555, 596), 345, 60, "GO TO MENU", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        goToMenuButton.setClickListener(btn -> {
+            Window.SwitchToView(Window.viewName.MENU);
         });
 
-        Button quitBtn = new Button("quit", new Vector2(556, 647), 328, 60, "QUIT", new Color(242, 242, 242), new Color(0, 0, 0, 0));
-        quitBtn.setClickListener(btn -> System.exit(0));
-
-        gameObjects.add(playBtn);
-        gameObjects.add(optionsBtn);
-        gameObjects.add(quitBtn);
+        gameObjects.add(resumeButton);
+        gameObjects.add(goToMenuButton);
     }
 
     @Override
@@ -113,4 +98,5 @@ public class Menu extends View {
         setCursor(Cursor.getPredefinedCursor(isHoveringAnyButton ? Cursor.HAND_CURSOR : Cursor.DEFAULT_CURSOR));
         g2.dispose();
     }
+
 }
