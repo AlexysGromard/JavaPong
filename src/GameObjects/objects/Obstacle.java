@@ -17,20 +17,20 @@ public class Obstacle extends GameObject{
         this.middleY = position.y;
 
         this.height = 100;
-        this.width = 20;
+        this.width = 12;
     }
 
     @Override
     public void draw(Graphics g) {
 
         //Indicative part
-        g.setColor(new Color(70, 6, 5));
-        g.fillRect(position.x + 8, this.middleY - 300,4 , 600 + this.height);
+//        g.setColor(new Color(51, 51, 51));
+//        g.fillRect(position.x + 8, this.middleY - 300,4 , 600 + this.height);
 
 
         //Main part
-        g.setColor(new Color(220, 15, 10));
-        g.fillRect(position.x, position.y, width, height);
+        g.setColor(new Color(255, 59, 48));
+        g.fillRoundRect(position.x, position.y, width, height, 10, 10);
     }
 
     @Override
