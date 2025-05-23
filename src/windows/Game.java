@@ -2,6 +2,8 @@ package windows;
 import java.awt.* ;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,16 +16,16 @@ import GameObjects.objects.Obstacle;
 import GameObjects.objects.Paddle;
 import GameObjects.objects.Puck;
 import GameObjects.objects.Text;
+import GameObjects.objects.Button;
 import controllers.KeyboardController;
 import controllers.PaddleController;
 import utils.FontManager;
 import utils.Vector2;
 import windows.Window.viewName;
 
-public class Game extends View {
+import javax.swing.*;
 
-    /* List of the displayed GameObject */
-    public static List<GameObject> gameObjects;
+public class Game extends View {
 
     /* Players' score */
     public static Integer scoreLeftPlayer = 0;
@@ -42,6 +44,14 @@ public class Game extends View {
     Game(){
         setBackground(new  Color(13, 13, 13)); 
         this.startGame();
+
+        // Add a mouse listener to handle clicks
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                handleClick(e.getPoint());
+            }
+        });
     }
 
     /**
@@ -88,6 +98,13 @@ public class Game extends View {
 
         // Create the puck
         gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
+
+        // Add pause button
+        Button pauseButton = new Button("pause", new Vector2(25, 25), 71, 25, "Pause", new Color(242, 242, 242), 20, new Color(0, 0, 0, 0));
+        pauseButton.setClickListener(btn -> {
+            Window.SwitchToView(viewName.PAUSE);
+        });
+        gameObjects.add(pauseButton);
     }
 
     /** Complete reset of the game (new match) */
@@ -131,8 +148,11 @@ public class Game extends View {
         // Antialiasing
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        GameCollision.checkCollision(); //Check des collisions
-        bonusManagement(); //Check the bonuses:
+        //Check des collisions
+        GameCollision.checkCollision(this);
+
+        //Check the bonuses:
+        bonusManagement();
 
         // Update and draw each game object
         for (GameObject go : gameObjects) {
@@ -140,6 +160,28 @@ public class Game extends View {
         }
 
         frameCounter++;
+
+        // Position souris logique
+        Point mousePosition = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(mousePosition, this);
+        Point logicalMousePosition = screenToLogical(mousePosition);
+
+        boolean isHoveringAnyButton = false;
+
+        for (GameObject go : gameObjects) {
+            if (go instanceof Button button) {
+                button.update(g, logicalMousePosition);
+                if (button.isMouseOver(logicalMousePosition)) {
+                    isHoveringAnyButton = true;
+                }
+            } else {
+                go.update(g);
+            }
+        }
+
+        setCursor(Cursor.getPredefinedCursor(isHoveringAnyButton ? Cursor.HAND_CURSOR : Cursor.DEFAULT_CURSOR));
+
+        g.dispose();
     }
 
     /**

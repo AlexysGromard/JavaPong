@@ -56,7 +56,7 @@ public class Result extends View {
         gameObjects.add(result_right);
 
         // Button
-        Button goToMenuButton = new Button("go_to_menu", new Vector2(548, 826), 345, 60, "GO TO MENU", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button goToMenuButton = new Button("go_to_menu", new Vector2(548, 826), 345, 60, "GO TO MENU", new Color(242, 242, 242), 48, new Color(0, 0, 0, 0));
         goToMenuButton.setClickListener(btn -> {
             Window.SwitchToView(Window.viewName.MENU);
         });

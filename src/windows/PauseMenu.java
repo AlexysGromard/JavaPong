@@ -46,12 +46,12 @@ public class PauseMenu extends View{
         gameObjects.add(new GameObjects.objects.Text("Title", 389, 247, "Pause menu", 96, FontManager.OrbitronStyle.BOLD, new Color(242, 242, 242)));
 
         // Create the buttons
-        Button resumeButton = new Button("resume", new Vector2(555, 476), 328, 60, "RESUME", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button resumeButton = new Button("resume", new Vector2(555, 476), 328, 60, "RESUME", new Color(242, 242, 242), 48, new Color(0, 0, 0, 0));
         resumeButton.setClickListener(btn -> {
             Window.SwitchToView(Window.viewName.GAME);
         });
 
-        Button goToMenuButton = new Button("go_to_menu", new Vector2(555, 596), 345, 60, "GO TO MENU", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button goToMenuButton = new Button("go_to_menu", new Vector2(555, 596), 345, 60, "GO TO MENU", new Color(242, 242, 242), 48, new Color(0, 0, 0, 0));
         goToMenuButton.setClickListener(btn -> {
             Window.SwitchToView(Window.viewName.MENU);
         });

@@ -53,20 +53,20 @@ public class Menu extends View {
         gameObjects.add(new GameObjects.objects.Text("Title", 444, 178, "JavaPong", 96, FontManager.OrbitronStyle.BOLD, new Color(242, 242, 242)));
 
         // Create the buttons
-        Button playBtn = new Button("play", new Vector2(556, 407), 328, 60, "PLAY", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button playBtn = new Button("play", new Vector2(556, 407), 328, 60, "PLAY", new Color(242, 242, 242), 48,new Color(0, 0, 0, 0));
         playBtn.setClickListener(btn -> {
             Window.SwitchToView(viewName.GAME);
             AudioPlayer.stop();
         });
 
-        Button optionsBtn = new Button("options", new Vector2(556, 527), 328, 60, "OPTIONS", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button optionsBtn = new Button("options", new Vector2(556, 527), 328, 60, "OPTIONS", new Color(242, 242, 242), 48,new Color(0, 0, 0, 0));
         optionsBtn.setClickListener(btn -> {
             System.out.println("OPTIONS clicked");
             // TODO: IMPLEMENT OPTION PAGE
             Window.SwitchToView(viewName.PAUSE);
         });
 
-        Button quitBtn = new Button("quit", new Vector2(556, 647), 328, 60, "QUIT", new Color(242, 242, 242), new Color(0, 0, 0, 0));
+        Button quitBtn = new Button("quit", new Vector2(556, 647), 328, 60, "QUIT", new Color(242, 242, 242), 48, new Color(0, 0, 0, 0));
         quitBtn.setClickListener(btn -> System.exit(0));
 
         gameObjects.add(playBtn);

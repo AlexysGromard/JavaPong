@@ -13,18 +13,20 @@ public class Button extends GameObject {
     private int width;
     private int height;
     private Color fontColor;
+    private int fontSize;
     private Color backgroundColor;
 
     private Point mousePosition;
     private ButtonClickListener clickListener;
 
-    public Button(String name, Vector2 position, int width, int height, String text, Color fontColor, Color backgroundColor) {
+    public Button(String name, Vector2 position, int width, int height, String text, Color fontColor, int fontSize, Color backgroundColor) {
         this.name = name;
         this.position = position;
         this.width = width;
         this.height = height;
         this.text = text;
         this.fontColor = fontColor;
+        this.fontSize = fontSize;
         this.backgroundColor = backgroundColor;
     }
 
@@ -65,7 +67,7 @@ public class Button extends GameObject {
         g2.fillRect(position.x, position.y, width, height);
 
         // Draw the button text
-        g2.setFont(FontManager.getOrbitron(48, FontManager.OrbitronStyle.MEDIUM));
+        g2.setFont(FontManager.getOrbitron(fontSize, FontManager.OrbitronStyle.MEDIUM));
         g2.setColor(fontColor);
         FontMetrics metrics = g2.getFontMetrics();
         int textWidth = metrics.stringWidth(text);

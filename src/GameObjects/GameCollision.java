@@ -7,9 +7,9 @@ public class GameCollision {
     /**
      * Check all the gameObjects in Game.gameObjects for collision
       */
-    public static void checkCollision(){
-        for (GameObject go1 : Game.gameObjects) {
-            for(GameObject go2 : Game.gameObjects){
+    public static void checkCollision(Game game){
+        for (GameObject go1 : game.gameObjects) {
+            for(GameObject go2 : game.gameObjects){
                 if(go1 != go2){
                     if(isColliding(go1, go2)){
                         go1.onCollisionEnter(go2);
