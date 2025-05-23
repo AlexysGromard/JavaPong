@@ -154,10 +154,6 @@ public class Game extends View {
         //Check the bonuses:
         bonusManagement();
 
-        // Update and draw each game object
-        for (GameObject go : gameObjects) {
-            go.update(g);
-        }
 
         frameCounter++;
 
