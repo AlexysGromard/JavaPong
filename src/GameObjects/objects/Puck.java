@@ -34,6 +34,7 @@ public class Puck extends GameObject{
     public void update(Graphics g) {
         this.position.x += this.speed.x;
         this.position.y += this.speed.y;
+        
         this.normalizeSpeed();
         draw(g);
     }
@@ -41,6 +42,7 @@ public class Puck extends GameObject{
     @Override
     public void onCollisionEnter(GameObject collision){
         Random r = new Random();
+
         if(collision instanceof Paddle ){
             if(collision.position.x > this.position.y){
                 this.speed.x = 0 - this.speed.x;
@@ -59,7 +61,7 @@ public class Puck extends GameObject{
 
             // Play sound
             AudioPlayer.play(Sound.PUCK_SOUND);
-       }
+        }
         else if(collision.name == "Border_top"){
             this.position.y += 4;
             this.speed.y *= -1;
@@ -74,22 +76,21 @@ public class Puck extends GameObject{
        }
        else if(collision.name == "Border_left"){
             Game.pointMarqued(false);
-
        }
         else if(collision.name == "Border_right"){
             Game.pointMarqued(true);
        }
-       else if(collision instanceof Obstacle){
+       else if(collision instanceof Obstacle){ //Colision with an obstacle
         
             if(collision.position.x > this.position.y){
                 this.speed.x = 0 - this.speed.x;
-                this.position.x -= 4;
+                this.position.x -= 6;
                 this.speed.x += r.nextInt(3) - 1;
                 this.speed.y += r.nextInt(3) - 1;
             }
             if(collision.position.x < this.position.y){
                 this.speed.x =  0 - this.speed.x;
-                this.position.x += 4;
+                this.position.x += 6;
                 this.speed.x += r.nextInt(3) - 1;
                 this.speed.y += r.nextInt(3) - 1;
             }
@@ -100,6 +101,8 @@ public class Puck extends GameObject{
 
     }
 
+    /** Reduce puck's speed if too high 
+     */
     private void normalizeSpeed(){
         int norme = speed.x * speed.x + speed.y * speed.y;
         if(norme> maxSpeed){

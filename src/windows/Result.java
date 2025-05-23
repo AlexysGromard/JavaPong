@@ -13,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.List;
 
 public class Result extends View {
     private BufferedImage backgroundImage;
@@ -69,6 +68,8 @@ public class Result extends View {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        //Display score + winner / looser
         score_left.text = Game.scoreLeftPlayer.toString();
         score_right.text = Game.scoreRightPlayer.toString();
         if(Game.scoreLeftPlayer > Game.scoreLeftPlayer){

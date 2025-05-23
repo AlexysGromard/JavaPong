@@ -22,23 +22,25 @@ import windows.Window.viewName;
 
 public class Game extends View {
 
+    /* List of the displayed GameObject */
     public static List<GameObject> gameObjects;
 
+    /* Players' score */
     public static Integer scoreLeftPlayer = 0;
     public static Integer scoreRightPlayer = 0;
 
+    /* Text object of the score */
     private static Text textScoreLeft;
     private static Text textScoreRight;
 
-
+    /* frameCounter for timer (add ball and obstacle) */
     private static int frameCounter = 0;
 
+    /* Did a player just goal ? */
     private static boolean restart = false;
 
     Game(){
-        setBackground(new  Color(13, 13, 13));
-
-        gameObjects = new ArrayList<GameObject>();
+        setBackground(new  Color(13, 13, 13)); 
         this.startGame();
     }
 
@@ -50,8 +52,9 @@ public class Game extends View {
     private void startGame(){
 
         //Clear the list in case of a new game.
-        gameObjects.clear();
+        gameObjects = new ArrayList<GameObject>();
 
+        //Reset score
         scoreLeftPlayer = 0;
         scoreRightPlayer = 0;
         frameCounter = 0;
@@ -88,12 +91,12 @@ public class Game extends View {
         gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
     }
 
+    /** Complete reset of the game (new match) */
     static void resetGame(){
         scoreLeftPlayer = 0;
         scoreRightPlayer = 0;
         frameCounter = 0;
-        restart = true;
-        
+        restart = true;    
     }
 
     @Override
@@ -101,7 +104,6 @@ public class Game extends View {
         super.paintComponent(g);
         if(restart){ 
             //La logique du restart lorsqu'un but est marqué est appliquée afin d'éviter les accès concurents sur gameObjects dans les foreach.
-
             List<GameObject> toDestroy = new ArrayList<GameObject>();
 
             //Suppr all balls and add a new one:
@@ -110,46 +112,41 @@ public class Game extends View {
                     toDestroy.add(go);
                 }
             }
-            for (GameObject go : toDestroy) {
-                
+            for (GameObject go : toDestroy) {        
                 gameObjects.remove(go);
-                
             }
 
+            //Change score text
             textScoreLeft.text = scoreLeftPlayer.toString();
-            textScoreRight.text = scoreRightPlayer.toString();
-           
+            textScoreRight.text = scoreRightPlayer.toString();  
 
             // Create the puck
             gameObjects.add(new Puck("Puck", 700, 493, 39, 39));
             restart = false;
         }
 
-
-
-        Graphics2D g2 = (Graphics2D) g.create();
-
         View.RenderContext ctx = getRenderContext();
-        g2.translate(ctx.xOffset(), ctx.yOffset());
-        g2.scale(ctx.scale(), ctx.scale());
+        g.translate(ctx.xOffset(), ctx.yOffset());
+        ((Graphics2D)g).scale(ctx.scale(), ctx.scale());
 
         // Antialiasing
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        //Check des collisions
-        GameCollision.checkCollision();
 
-        //Check the bonuses:
-        bonusManagement();
+        GameCollision.checkCollision(); //Check des collisions
+        bonusManagement(); //Check the bonuses:
 
         // Update and draw each game object
         for (GameObject go : gameObjects) {
-            go.update(g2);
+            go.update(g);
         }
 
         frameCounter++;
-        g2.dispose();
     }
+
+    /**
+     * Manage bonuses (2nd ball and obstacle)
+     */
     private void bonusManagement(){
         //In charge of increasing puck's speed or adding obstacles.
         if(frameCounter > 600){
@@ -165,7 +162,10 @@ public class Game extends View {
         } 
     }
 
-
+    /**
+     * Public void called when a point is earn
+     * @param isLeftPlayer False if right-player market, True if left-player
+      */
     public static void pointMarqued(boolean isLeftPlayer){
         if(isLeftPlayer){
             scoreLeftPlayer++;
