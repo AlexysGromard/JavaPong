@@ -36,13 +36,14 @@ public class Input extends GameObject {
         g.fillRoundRect(position.x, position.y, width, height, 10, 10);
 
         // Draw the input text
+        // Calculate the position to center the text within the rectangle
         g2.setFont(FontManager.getOrbitron(fontSize, fontStyle));
-        g2.setColor(color);
         FontMetrics metrics = g2.getFontMetrics();
-        int textX = position.x + (width - metrics.stringWidth(inputText)) / 2; // Center the text horizontally
-        int textY = position.y + (height - metrics.getHeight()) / 2 + metrics.getAscent(); // Center the text vertically
+        int textX = position.x + (width - metrics.stringWidth(inputText)) / 2;
+        int textY = position.y + (height - metrics.getHeight()) / 2;
 
-        g2.drawString(inputText, textX, textY);
+        Text textObject = new Text(name, textX, textY, inputText, fontSize, fontStyle, color);
+        textObject.draw(g);
     }
 
     @Override

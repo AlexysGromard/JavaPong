@@ -26,7 +26,13 @@ public class Text extends GameObject{
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.setFont(FontManager.getOrbitron(fontSize, fontStyle));
+        // If the text contains non-Latin characters, use a different font
+        if (!text.matches("[\\p{L}\\p{N} ]+")) {
+            g2.setFont(new Font("Segoe UI Symbol", Font.PLAIN, fontSize));
+        } else {
+            g2.setFont(FontManager.getOrbitron(fontSize, fontStyle));
+        }
+
         g2.setColor(color);
         g2.drawString(text, position.x, position.y + g2.getFontMetrics().getAscent());
     }
