@@ -61,9 +61,7 @@ public class Menu extends View {
 
         Button optionsBtn = new Button("options", new Vector2(556, 527), 328, 60, "OPTIONS", new Color(242, 242, 242), 48,new Color(0, 0, 0, 0));
         optionsBtn.setClickListener(btn -> {
-            System.out.println("OPTIONS clicked");
-            // TODO: IMPLEMENT OPTION PAGE
-            Window.SwitchToView(viewName.PAUSE);
+            Window.SwitchToView(viewName.OPTIONS);
         });
 
         Button quitBtn = new Button("quit", new Vector2(556, 647), 328, 60, "QUIT", new Color(242, 242, 242), 48, new Color(0, 0, 0, 0));

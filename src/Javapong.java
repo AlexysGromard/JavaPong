@@ -9,7 +9,7 @@ import windows.Window;
  * and updates the game's FPS counter.
  */
 public class Javapong{
-    public  static final int FPS = 60;
+    public static final int FPS = 60;
     static final long FRAME_TIME = 1000000000 / FPS; // In nanoseconds
 
     /**

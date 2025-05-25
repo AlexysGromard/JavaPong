@@ -22,7 +22,7 @@ public class Window extends JFrame {
      * different user interfaces, using a card layout in the application's main panel.
      */
     static public enum viewName{
-        GAME, MENU, RESULT, PAUSE, NEWGAME;
+        GAME, MENU, RESULT, PAUSE, NEWGAME, OPTIONS
     }
 
     /**
@@ -80,11 +80,13 @@ public class Window extends JFrame {
         final Game game = new Game();
         final Result result = new Result();
         final PauseMenu pauseMenu = new PauseMenu();
+        final Options options = new Options();
 
         panel.add(menu, "Menu");
         panel.add(game, "Game");
         panel.add(result, "Result");
         panel.add(pauseMenu, "Pause");
+        panel.add(options, "Options");
 
         return panel;
     }
@@ -119,6 +121,9 @@ public class Window extends JFrame {
         } else if (view == viewName.PAUSE) {
             CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
             cl.show(mainPanel, "Pause");
+        } else if (view == viewName.OPTIONS) {
+            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
+            cl.show(mainPanel, "Options");
         }
 
         //Rendre le focus à la fenêtre affichée
