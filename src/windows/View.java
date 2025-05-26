@@ -5,6 +5,8 @@ import GameObjects.objects.Button;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
@@ -17,6 +19,15 @@ abstract class View extends JPanel {
     private static final int REF_HEIGHT = 1024;
 
     public List<GameObject> gameObjects;
+
+    View() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                handleClick(e.getPoint());
+            }
+        });
+    }
 
     /**
      * Calculates and returns the current rendering context of the view, which

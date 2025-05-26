@@ -33,14 +33,6 @@ public class Result extends View {
 
         this.gameObjects = new java.util.ArrayList<GameObject>();
         this.InstantiateObjects();
-
-        // Add a mouse listener to handle clicks
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                handleClick(e.getPoint());
-            }
-        });
     }
 
     private void InstantiateObjects(){

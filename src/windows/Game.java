@@ -44,14 +44,6 @@ public class Game extends View {
     Game(){
         setBackground(new  Color(13, 13, 13)); 
         this.startGame();
-
-        // Add a mouse listener to handle clicks
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                handleClick(e.getPoint());
-            }
-        });
     }
 
     /**
