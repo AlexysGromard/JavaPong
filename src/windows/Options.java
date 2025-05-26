@@ -63,7 +63,7 @@ public class Options extends View {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        super.paintComponent(g); //To keep background
 
         RenderContext ctx = getRenderContext();
         g.translate(ctx.xOffset(), ctx.yOffset());
