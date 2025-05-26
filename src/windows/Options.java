@@ -6,13 +6,29 @@ import utils.FontManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+/**
+ * The {@code Options} class represents the options menu in the application.
+ * It extends the {@code View} class and provides functionalities for handling
+ * and displaying various options, including controls configuration and display
+ * settings.
+ *
+ * The options menu is initialized with a background image and several game objects,
+ * such as text fields, input fields, and buttons.
+ */
 public class Options extends View {
     private BufferedImage backgroundImage;
 
+    /**
+     * Constructs an instance of the Options class.
+     *
+     * Initializes the background color and attempts to load the background image
+     * for the options menu. If an error occurs while loading the image, the stack
+     * trace is printed. This constructor also initializes the game objects by
+     * calling the `InstantiateObjects` method, which sets up various text, input
+     * fields, and buttons specific to the Options menu.
+     */
     Options() {
         setBackground(new java.awt.Color(13, 13, 13));
         try {
@@ -61,6 +77,16 @@ public class Options extends View {
         gameObjects.add(backBtn);
     }
 
+    /**
+     * Paints the graphical components of the options panel, rendering the background image,
+     * game objects, and handling the logic to update buttons based on the mouse position.
+     * This method is invoked by the Swing framework when the component needs to be repainted.
+     * It also ensures that the graphical elements are correctly scaled and positioned according
+     * to the current rendering context.
+     *
+     * @param g the {@code Graphics} object to be used for rendering the component. It provides
+     *          the drawing context for displaying elements such as images, shapes, and text.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To keep background
