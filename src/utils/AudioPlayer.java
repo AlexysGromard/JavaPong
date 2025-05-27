@@ -64,14 +64,4 @@ public class AudioPlayer {
             clip.close();
         }
     }
-
-    /**
-     * Checks if the audio clip is currently playing.
-     * This method verifies whether the clip is not null and is actively running.
-     *
-     * @return {@code true} if an audio clip is currently playing; {@code false} otherwise
-     */
-    public static boolean isPlaying() {
-        return clip != null && clip.isRunning();
-    }
 }
