@@ -32,6 +32,11 @@
 - `Z` : Déplacer la raquette gauche vers le haut.
 - `S` : Déplacer la raquette gauche vers le bas.
 
+## 🎆 Images du jeu
+![main](https://github.com/user-attachments/assets/4a7c6384-f0c5-4d45-b82d-a7553c837bd6)
+![game](https://github.com/user-attachments/assets/76bd3d49-fb86-4b5f-8c5a-a4e071c9ece8)
+![game2](https://github.com/user-attachments/assets/1504e6db-dbea-4b39-84f0-a4161f2325ae)
+
 ---
 
 *Amusez-vous bien !*
