@@ -144,5 +144,12 @@ public class Puck extends GameObject{
             speed.x =speed.x * maxSpeed / norme;
             speed.y = speed.y * maxSpeed / norme;
         }
+        if(speed.x > 0){
+            this.speed.x = Math.max(speed.x, 3);
+        }
+        else{
+            this.speed.x = Math.min(speed.x, -3);
+        }
+        
     }
 }
