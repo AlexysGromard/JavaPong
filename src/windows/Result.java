@@ -64,7 +64,7 @@ public class Result extends View {
         //Display score + winner / looser
         score_left.text = Game.scoreLeftPlayer.toString();
         score_right.text = Game.scoreRightPlayer.toString();
-        if(Game.scoreLeftPlayer > Game.scoreLeftPlayer){
+        if(Game.scoreLeftPlayer < Game.scoreRightPlayer){
              result_left.text = "Looser";
             result_right.text = "Winner";
         }
