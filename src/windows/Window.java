@@ -103,27 +103,28 @@ public class Window extends JFrame {
      *             This must be one of the options defined in the {@link viewName}
      */
     static void SwitchToView(viewName view){
-        if(view == viewName.GAME){
-            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
-            cl.show(mainPanel, "Game");
-        }
-        else if(view == viewName.NEWGAME){
-            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
-            cl.show(mainPanel, "Game");
-            Game.resetGame();
-        }
-        else if(view == viewName.MENU){
-            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
-            cl.show(mainPanel, "Menu");
-        } else if (view == viewName.RESULT) {
-            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
-            cl.show(mainPanel, "Result");
-        } else if (view == viewName.PAUSE) {
-            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
-            cl.show(mainPanel, "Pause");
-        } else if (view == viewName.OPTIONS) {
-            CardLayout cl = (CardLayout)Window.mainPanel.getLayout();
-            cl.show(mainPanel, "Options");
+        CardLayout cl = (CardLayout) Window.mainPanel.getLayout();
+
+        switch(view) {
+            case GAME:
+                cl.show(mainPanel, "Game");
+                break;
+            case NEWGAME:
+                cl.show(mainPanel, "Game");
+                Game.resetGame();
+                break;
+            case MENU:
+                cl.show(mainPanel, "Menu");
+                break;
+            case RESULT:
+                cl.show(mainPanel, "Result");
+                break;
+            case PAUSE:
+                cl.show(mainPanel, "Pause");
+                break;
+            case OPTIONS:
+                cl.show(mainPanel, "Options");
+                break;
         }
 
         //Rendre le focus à la fenêtre affichée
