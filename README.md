@@ -1,7 +1,6 @@
 # 🎮 JavaPong
 
 ![Java](https://img.shields.io/badge/language-Java-orange.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Stars](https://img.shields.io/github/stars/AlexysGromard/JavaPong?style=social)
 ![Last Commit](https://img.shields.io/github/last-commit/AlexysGromard/JavaPong)
 
